@@ -1,0 +1,145 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray('ViewCourses', authServices.Permissions)
+  "
+>
+  <div>
+    <div class="lls-container mt-5" *ngIf="coursesList$ as courses">
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="d-flex justify-content-end">
+            <button
+              *ngIf="
+                authServices.searchStringInArray(
+                  'AddDeleteEdit_Course',
+                  authServices.Permissions
+                )
+              "
+              class="blue-btn dropdown-toggle"
+              routerLink="/user/courses/create-course"
+            >
+              New Course
+            </button>
+          </div>
+          <div class="d-flex align-items-center my-2">
+            <h6 class="bold black mb-0 me-3">Filter By:</h6>
+            <div class="search-input dropdown-toggle mx-4">
+              <input
+                #searchByname
+                class=""
+                placeholder="filter by course code"
+                (change)="searchByName(searchByname.value)"
+              />
+            </div>
+
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByCoursename
+                class=""
+                placeholder="filter by course name"
+                (change)="searchByCourseName(searchByCoursename.value)"
+              />
+            </div>
+          </div>
+          <div class="table-lls my-5">
+            <table>
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th># Of Student</th>
+                <th># Of Experiments</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let course of courses">
+                <!-- <td>{{ course?.idd | sub }}</td> -->
+                <td>{{ course?.code }}</td>
+                <td>{{ course?.name }}</td>
+                <td>{{ course?.numberOfStudents }}</td>
+                <td>{{ course?.numberOfExp }}</td>
+                <td>{{ course?.startDate | date }}</td>
+                <td>{{ course?.endDate | date }}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <a
+                      class="blue cursor text-decoration-none"
+                      routerLink="details/{{ course?.idd }}"
+                    >
+                      Veiw
+                    </a>
+                    <a
+                      *ngIf="
+                        authServices.searchStringInArray(
+                          'AddDeleteEdit_Course',
+                          authServices.Permissions
+                        )
+                      "
+                      class="blue cursor text-decoration-none mx-2"
+                      (click)="showDiloagEdit(course.idd)"
+                    >
+                      Edit
+                    </a>
+                    <a
+                      *ngIf="
+                        authServices.searchStringInArray(
+                          'AddDeleteEdit_Course',
+                          authServices.Permissions
+                        )
+                      "
+                      class="blue cursor text-decoration-none mx-2"
+                      (click)="deletCourse(course.idd)"
+                    >
+                      Delete
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div
+              class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+            >
+              <div>showing 1 to 10  </div>
+
+              <div class="">
+                <nav aria-label="Page navigation example  " class="page my-2">
+                  <ul class="pagination d-flex justify-content-center">
+                    <li class="page-item"  *ngIf="pervious">
+                      <a class="page-link blue cursor" (click)="perviousP()">
+                        previous
+                      </a>
+                    </li>
+                    <!-- <li class="page-item" *ngFor="let page of pages">
+                      <a
+                        (click)="paginate(page, pages)"
+                        class="page-link orange cursor"
+                        [ngClass]="{ active: page === currentPageNumber }"
+                        >{{ page }}</a
+                      >
+                    </li> -->
+                    <li class="page-item" *ngIf="next">
+                      <a (click)="paginate()" class="page-link blue cursor">
+                        next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-dialog
+    *ngIf="id"
+    header="Edit Experiment"
+    [(visible)]="courseServices.editCourseForm"
+    [draggable]="false"
+    [modal]="true"
+    [style]="{ width: '50vw', height: '70vh' }"
+  >
+    <app-edit-course [itemId]="id"></app-edit-course>
+  </p-dialog>
+</div>

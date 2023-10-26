@@ -1,0 +1,152 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'ViewAnalytics_Teacher',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="lls-container mt-5" *ngIf="analyticsService.sections.length">
+    <section class="bg-grey py-4 expirment">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="d-flex justify-content-between">
+            <div>
+              <span class="text-danger mx-2" *ngIf="emptyScore"
+                >all scores are required</span
+              >
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <button
+              [disabled]="currentSectionNumber <= 0"
+              (click)="previousSection()"
+              class="blue-btn"
+            >
+              Previous Section
+            </button>
+            <button
+              [disabled]="
+                currentSectionNumber >= analyticsService.sections.length - 1
+              "
+              (click)="nextSection()"
+              class="blue-btn"
+            >
+              Next Section
+            </button>
+          </div>
+          <div>
+            <div class="drop my-4">
+              <h5 class="blue">
+                {{ analyticsService.sections[currentSectionNumber].title }}
+              </h5>
+              <p
+                *ngIf="
+                  analyticsService.sections[currentSectionNumber].config.help
+                "
+              >
+                {{
+                  analyticsService.sections[currentSectionNumber].config.help
+                }}
+              </p>
+              <div class="row">
+                <div
+                  *ngFor="
+                    let column of getNumberOfColumns(
+                      analyticsService.sections[currentSectionNumber].config
+                        .numberOfColumns
+                    )
+                  "
+                  [ngClass]="{
+                    'col-lg-4':
+                      analyticsService.sections[currentSectionNumber].config
+                        .numberOfColumns == 3 &&
+                      analyticsService.sections[currentSectionNumber].vrl
+                        .layout == layout[1],
+                    'col-lg-6':
+                      analyticsService.sections[currentSectionNumber].config
+                        .numberOfColumns == 2 &&
+                      analyticsService.sections[currentSectionNumber].vrl
+                        .layout == layout[1],
+                    'col-lg-12':
+                      (analyticsService.sections[currentSectionNumber].config
+                        .numberOfColumns == 1 &&
+                        analyticsService.sections[currentSectionNumber].vrl
+                          .layout == layout[1]) ||
+                      analyticsService.sections[currentSectionNumber].vrl
+                        .layout == layout[0]
+                  }"
+                >
+                  <div class="border-content my-4 content bg-content">
+                    <div>
+                      <div
+                        class="content-or-question-display"
+                        *ngFor="
+                          let typecolumn of analyticsService.sections[
+                            currentSectionNumber
+                          ]['column' + column];
+                          let createdIndex = index
+                        "
+                      >
+                        <app-grading-content
+                          *ngIf="
+                            typecolumn.mainType == analyticsService.contentType
+                          "
+                          [sectionIndex]="currentSectionNumber"
+                          [columnIndex]="column"
+                          [pushedIndex]="createdIndex"
+                          [data]="typecolumn"
+                        >
+                        </app-grading-content>
+                        <app-true-false-by-answer
+                          *ngIf="
+                            typecolumn.type == analyticsService.trueOrFalseType
+                          "
+                          [sectionIndex]="currentSectionNumber"
+                          [columnIndex]="column"
+                          [pushedIndex]="createdIndex"
+                          [data]="typecolumn"
+                          [isAvg]="true"
+                        ></app-true-false-by-answer>
+                        <app-open-by-answer
+                          *ngIf="
+                            typecolumn.type == analyticsService.openQuestionType
+                          "
+                          [sectionIndex]="currentSectionNumber"
+                          [columnIndex]="column"
+                          [pushedIndex]="createdIndex"
+                          [data]="typecolumn"
+                          [isAvg]="true"
+                        ></app-open-by-answer>
+                        <app-mcq-single-by-answer
+                          *ngIf="
+                            typecolumn.type == analyticsService.singleMcqType
+                          "
+                          [sectionIndex]="currentSectionNumber"
+                          [columnIndex]="column"
+                          [pushedIndex]="createdIndex"
+                          [data]="typecolumn"
+                          [isAvg]="true"
+                        ></app-mcq-single-by-answer>
+                        <app-mcq-multi-by-answer
+                          *ngIf="
+                            typecolumn.type == analyticsService.multiMcqType
+                          "
+                          [sectionIndex]="currentSectionNumber"
+                          [columnIndex]="column"
+                          [pushedIndex]="createdIndex"
+                          [data]="typecolumn"
+                          [isAvg]="true"
+                        ></app-mcq-multi-by-answer>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

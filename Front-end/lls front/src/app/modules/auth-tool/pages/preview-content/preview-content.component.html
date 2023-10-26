@@ -1,0 +1,33 @@
+<section class="p-4  my-3 w-100">
+    <div *ngIf="contentType == authToolService.imageType" class="img-dis d-flex justify-content-center">
+      <img [src]="data.content.data.url" width="250px" height="250px" [title]="data.content.data.help" />
+    </div>
+    <div *ngIf="contentType == authToolService.videoType" class="img-dis d-flex justify-content-center">>
+      <video controls  width="250px" height="250px" >
+        <source [src]="data.content.data.url"  >
+      </video>
+    </div>
+    <div *ngIf="contentType == authToolService.textType" class="lls-form">
+      <div class="lls-form-group" [innerHTML]="parseHtml()">
+        <!-- <p class="form-label">Text:</p>
+        <p class="form-input w-75">{{ data.content.data.text }}</p> -->
+      </div>
+    </div>
+    
+    <div *ngIf="contentType == authToolService.codeType" class="lls-form">
+      <div class="lls-form-group">
+        <p class="form-label">Language:</p>
+        <p class="form-input w-75">{{ data.content.data.lang }}</p>
+      </div>
+      <div class="lls-form-group">
+        <p class="form-label">Code:</p>
+        <p class="form-input w-75">{{ data.content.data.code }}</p>
+      </div>
+    </div>
+    <div *ngIf="contentType == authToolService.iframeType" class="lls-form">
+      <iframe [src]="iframeURl()" frameborder="0"></iframe>
+    </div>
+    
+    
+    
+  </section>

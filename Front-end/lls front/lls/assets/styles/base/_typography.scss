@@ -1,0 +1,141 @@
+// // Eespresso Montserrat Font
+// // Regular
+// @font-face {
+//   font-family: "montserratRegular";
+//   src: url("../../fonts/Montserrat/regular/Montserrat-Regular.eot"),
+//     url("../../fonts/Montserrat/regular/Montserrat-Regular.woff2")
+//       format("woff2"),
+//     url("../../fonts/Montserrat/regular/Montserrat-Regular.woff") format("woff"),
+//     url("../../fonts/Montserrat/regular/Montserrat-Regular.ttf")
+//       format("truetype");
+// }
+
+// // medium
+// @font-face {
+//   font-family: "montserratMedium";
+//   src: url("../../fonts/Montserrat/medium/Montserrat-Medium.eot"),
+//     url("../../fonts/Montserrat/medium/Montserrat-Medium.woff2") format("woff2"),
+//     url("../../fonts/Montserrat/medium/Montserrat-Medium.woff") format("woff"),
+//     url("../../fonts/Montserrat/medium/Montserrat-Medium.ttf")
+//       format("truetype");
+// }
+// // light
+// @font-face {
+//   font-family: "montserratLight";
+//   src: url("../../fonts/Montserrat/light/Montserrat-Light.eot"),
+//     url("../../fonts/Montserrat/light/Montserrat-Light.woff2") format("woff2"),
+//     url("../../fonts/Montserrat/light/Montserrat-Light.woff") format("woff"),
+//     url("../../fonts/Montserrat/light/Montserrat-Light.ttf") format("truetype");
+// }
+// // SemiBold
+// @font-face {
+//   font-family: "montserratSemiBold";
+//   src: url("../../fonts/Montserrat/semi-bold/Montserrat-SemiBold.eot"),
+//     url("../../fonts/Montserrat/semi-bold/Montserrat-SemiBold.woff2")
+//       format("woff2"),
+//     url("../../fonts/Montserrat/semi-bold/Montserrat-SemiBold.woff")
+//       format("woff"),
+//     url("../../fonts/Montserrat/semi-bold/Montserrat-SemiBold.ttf")
+//       format("truetype");
+// }
+
+// // Bold
+// @font-face {
+//   font-family: "montserratBold";
+//   src: url("../../fonts/Montserrat/bold/Montserrat-Bold.eot"),
+//     url("../../fonts/Montserrat/bold//Montserrat-Bold.woff2") format("woff2"),
+//     url("../../fonts/Montserrat/bold/Montserrat-Bold.woff") format("woff"),
+//     url("../../fonts/Montserrat/bold/Montserrat-Bold.ttf") format("truetype");
+// }
+
+// // Eespresso Ar Font
+// // cairo regular
+
+// @font-face {
+//   font-family: "cairoRegular";
+//   src: url("../../fonts/ar-cairo/regular/Cairo-Regular.eot"),
+//     url("../../fonts/ar-cairo/regular/Cairo-Regular.woff2") format("woff2"),
+//     url("../../fonts/ar-cairo/regular/Cairo-Regular.woff") format("woff"),
+//     url("../../fonts/ar-cairo/regular/Cairo-Regular.ttf") format("truetype");
+// }
+
+// // cairo semiBold
+
+// @font-face {
+//   font-family: "cairoSemiBold";
+//   src: url("../../fonts/ar-cairo/semiBold/Cairo-SemiBold.eot"),
+//     url("../../fonts/ar-cairo/semiBold/Cairo-SemiBold.woff2") format("woff2"),
+//     url("../../fonts/ar-cairo/semiBold/Cairo-SemiBold.woff") format("woff"),
+//     url("../../fonts//ar-cairo/semiBold/Cairo-SemiBold.ttf") format("truetype");
+// }
+
+// // Eespresso Antique
+// // antique regular
+
+// @font-face {
+//   font-family: "antigueRegular";
+//   src: url("../../fonts/Antique/regular/Antique-Regular.eot"),
+//     url("../../fonts/Antique/regular/Antique-Regular.woff2") format("woff2"),
+//     url("../../fonts/Antique/regular/Antique-Regular.woff") format("woff"),
+//     url("../../fonts/Antique/regular/Antique-Regular.ttf") format("truetype");
+// }
+
+// // antigue semiBold
+
+// @font-face {
+//   font-family: "antiqueSemiBold";
+//   src: url("../../fonts/Antique/semibold/Antique-SemiBold.eot"),
+//     url("../../fonts/Antique/semibold/Antique-SemiBold.woff2") format("woff2"),
+//     url("../../fonts/Antique/semibold/Antique-SemiBold.woff") format("woff"),
+//     url("../../fonts/Antique/semibold/Antique-SemiBold.ttf") format("truetype");
+// }
+
+// /* Montserrat  Font Family */
+// $E-m-regular: "montserratRegular", sans-serif;
+
+// $E-m-medium: "montserratMedium", sans-serif;
+
+// $E-m-semiBold: "montserratSemiBold", sans-serif;
+// $E-m-bold: "montserratBold", sans-serif;
+// $E-m-light: "montserratLight", sans-serif;
+// /* cairo  Font Family */
+// $E-Ca-regular: "cairoRegular", sans-serif;
+// $E-Ca-bold: "cairoSemiBold", sans-serif;
+
+// /* antique  Font Family */
+// $E-A-regular: "antigueRegular", sans-serif;
+// $E-A-bold: "antiqueSemiBold", sans-serif;
+// // all font family classes
+
+// .antique-regular {
+//   font-family: $E-A-regular;
+// }
+
+// .antique-bold {
+//   font-family: $E-A-bold;
+// }
+// .light {
+//   font-family: $E-m-light;
+// }
+// .regular {
+//   font-family: $E-m-regular;
+// }
+
+// .medium {
+//   font-family: $E-m-medium;
+// }
+
+// .s-bold {
+//   font-family: $E-m-semiBold;
+// }
+
+// .bold {
+//   font-family: $E-m-bold;
+// }
+
+// // .c-regular {
+// //   font-family: $E-Ca-regular;
+// // }
+// // .c-bold {
+// //   font-family: $E-Ca-bold;
+// // }

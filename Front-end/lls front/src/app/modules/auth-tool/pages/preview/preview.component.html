@@ -1,0 +1,120 @@
+<section class="bg-grey py-4 expirment" *ngIf="sections?.length">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between">
+      <!-- <h3 class="blue">
+      Number of sections : {{ sections.length }}
+    </h3> -->
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+        [disabled]="currentSectionNumber <= 0"
+        (click)="previousSection()"
+        class="blue-btn"
+      >
+        Previous Section
+      </button>
+      <!-- <span class="blue"
+      >active section : {{ currentSectionNumber + 1 }}</span
+    > -->
+      <button
+        [disabled]="currentSectionNumber >= sections.length - 1"
+        (click)="nextSection()"
+        class="blue-btn"
+      >
+        Next Section
+      </button>
+    </div>
+    <div class="row">
+      <div
+        [ngClass]="{
+          'col-lg-12': !sections[currentSectionNumber].vrl.active,
+          'col-lg-6':
+            sections[currentSectionNumber].vrl.active &&
+            sections[currentSectionNumber].vrl.layout == layout[1]
+        }"
+      >
+        <!-- *ngFor="let section of sections;let i=index" -->
+        <div class="drop my-4">
+          <h5 class="blue">
+            {{ sections[currentSectionNumber].title }}
+          </h5>
+          <p *ngIf="sections[currentSectionNumber].config.help">
+            {{ sections[currentSectionNumber].config.help }}
+          </p>
+          <div class="row">
+            <div
+              *ngFor="
+                let column of getNumberOfColumns(
+                  sections[currentSectionNumber].config.numberOfColumns
+                )
+              "
+              [ngClass]="{
+                'col-lg-4':
+                  sections[currentSectionNumber].config.numberOfColumns == 3 &&
+                  sections[currentSectionNumber].vrl.layout == layout[1],
+                'col-lg-6':
+                  sections[currentSectionNumber].config.numberOfColumns == 2 &&
+                  sections[currentSectionNumber].vrl.layout == layout[1],
+                'col-lg-12':
+                  (sections[currentSectionNumber].config.numberOfColumns == 1 &&
+                    sections[currentSectionNumber].vrl.layout == layout[1]) ||
+                  sections[currentSectionNumber].vrl.layout == layout[0]
+              }"
+            >
+              <div class="border-content my-4 content bg-content">
+                <div>
+                  <div
+                    class="content-or-question-display"
+                    *ngFor="
+                      let typecolumn of sections[currentSectionNumber][
+                        'column' + column
+                      ];
+                      let createdIndex = index
+                    "
+                  >
+                    <app-preview-content
+                      *ngIf="typecolumn.mainType == authToolService.contentType"
+                      [data]="typecolumn"
+                    ></app-preview-content>
+                    <app-preview-true-false
+                      *ngIf="typecolumn.type == authToolService.trueOrFalseType"
+                      [data]="typecolumn"
+                    ></app-preview-true-false>
+                    <app-preview-open-question
+                      *ngIf="
+                        typecolumn.type == authToolService.openQuestionType
+                      "
+                      [data]="typecolumn"
+                    ></app-preview-open-question>
+                    <app-preview-mcq-single
+                      *ngIf="typecolumn.type == authToolService.singleMcqType"
+                      [data]="typecolumn"
+                    ></app-preview-mcq-single>
+                    <app-preview-mcq-multi
+                      *ngIf="typecolumn.type == authToolService.multiMcqType"
+                      [data]="typecolumn"
+                    ></app-preview-mcq-multi>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        [ngClass]="{
+          'show-vrl': sections[currentSectionNumber].vrl.active,
+          'hide-vrl': !sections[currentSectionNumber].vrl.active,
+          'col-lg-12':
+            sections[currentSectionNumber].vrl.active &&
+            sections[currentSectionNumber].vrl.layout == layout[0],
+          'col-lg-6 iframe-design':
+            sections[currentSectionNumber].vrl.active &&
+            sections[currentSectionNumber].vrl.layout == layout[1]
+        }"
+      >
+        <h3 class="text-center">VRL</h3>
+      </div>
+    </div>
+  </div>
+</section>

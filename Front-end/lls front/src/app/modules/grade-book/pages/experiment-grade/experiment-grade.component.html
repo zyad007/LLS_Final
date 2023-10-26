@@ -1,0 +1,83 @@
+<div class="table-lls my-5" *ngIf="Gradings$ as Gradings">
+  <div *ngIf="Gradings.length">
+    <div class="d-flex align-items-center my-2">
+      <h6 class="bold black mb-0 me-3">Filter By:</h6>
+      <div class="search-input dropdown-toggle mx-4">
+        <input
+          #searchByname
+          class=""
+          placeholder="filter by email"
+          (change)="searchByName(searchByname.value)"
+        />
+      </div>
+    </div>
+    <div class="d-flex justify-content-end my-2">
+      <button class="blue-btn" (click)="exportReport()">Export Report</button>
+    </div>
+    <table>
+      <tr>
+        <!-- <th>Id</th> -->
+        <th>Email</th>
+        <th>Name</th>
+        <th>Trial</th>
+        <th>grade</th>
+        <th>FeedBack</th>
+        <th class="text-center">Actions</th>
+      </tr>
+      <tr *ngFor="let ex of Gradings">
+        <!-- <td>
+          {{ ex.id }}
+        </td> -->
+        <td>{{ ex.email }}</td>
+        <td>{{ ex.name }}</td>
+        <td>{{ ex.numberOfTials }}</td>
+        <td>{{ ex.finalGrade }}</td>
+        <td>{{ ex.feedback }}</td>
+        <td class="blue">
+          <div *ngIf="ex.numberOfTials" class="d-flex justify-content-around">
+            <a
+              class="blue cursor"
+              routerLink="/user/grade-book/trial/{{ courseId }}/{{
+                experimentId
+              }}/{{ ex.id }}"
+            >
+              View
+            </a>
+            <a class="blue cursor" (click)="exportExperiment(ex.id)">
+              Export Report
+            </a>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div
+      class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+    >
+      <div>showing 1 to 10  </div>
+      <div class="" *ngIf="currentPageNumber$ | async as currentPageNumber">
+        <nav aria-label="Page navigation example  " class="page my-2">
+          <ul class="pagination d-flex justify-content-center" >
+            <li class="page-item" *ngIf="pervious">
+              <a class="page-link blue cursor" (click)="perviousP()"> previous </a>
+            </li>
+            <!-- <li class="page-item" *ngFor="let page of pages">
+              <a
+                *ngIf="page <= 5"
+                (click)="paginate(page, pages)"
+                class="page-link orange cursor"
+                [ngClass]="{ active: page === currentPageNumber }"
+                >{{ page }}</a
+              >
+            </li> -->
+            <li class="page-item" *ngIf="next">
+              <a (click)="paginate()" class="page-link blue cursor"> next </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="my-5 sub-title w-50" *ngIf="!Gradings.length">
+    <p class="text-center medium">No Gradings In this course untill now</p>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<section class="my-3 p-4 w-100">
+  <p *ngIf="data.config.help">{{ data.config.help }}</p>
+  <div>
+    <div>{{ data.content.data.question }}</div>
+    <div class="">
+      <div
+        class=""
+        *ngFor="let choice of data.content.data.choices; let i = index"
+      >
+        <div>
+          <p-radioButton
+            [disabled]="true"
+            [(ngModel)]="chooice"
+            [inputId]="'answer' + i + choice.choice"
+            [name]="'answer' + i + choice.choice"
+            [value]="i"
+            class="mx-1"
+          ></p-radioButton>
+          <label [for]="'answer' + i + choice.choice">{{
+            choice.choice
+          }}</label>
+          (<span class="blue">{{ choice.score }}</span
+          >)
+        </div>
+      </div>
+    </div>
+
+    <div class="lls-form my-3" *ngIf="isAvg">
+      <h5>
+        average :<span class="blue"> {{ data.avg }}</span>
+      </h5>
+    </div>
+  </div>
+</section>

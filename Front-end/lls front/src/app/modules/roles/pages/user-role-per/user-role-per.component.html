@@ -1,0 +1,44 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'AddDeleteEdit_Exp',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="lls-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center w-50 mt-4">
+          <button
+            class="blue-btn bg-light-blue px-3 py-1 black"
+            (click)="isUser()"
+          >
+            Users
+          </button>
+          <button
+            class="blue-btn bg-light-blue px-3 py-1 black mx-5"
+            (click)="isRole()"
+          >
+            Roles
+          </button>
+          <button
+            class="blue-btn bg-light-blue px-3 py-1 black"
+            (click)="isPermission()"
+          >
+            Permissions
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-2" *ngIf="roleService.isUser">
+    <app-user></app-user>
+  </div>
+  <div class="my-2" *ngIf="roleService.isRole">
+    <app-roles></app-roles>
+  </div>
+  <div class="my-2" *ngIf="roleService.isPermissions">
+    <app-permissions></app-permissions>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<section class="my-3 p-4 w-100">
+  <!-- <h5 class="blue">Open Question</h5> -->
+  <!-- <p *ngIf="data.config.help">{{data.config.help}}</p> -->
+  <div class="accordion-item my-3">
+    <h2 class="accordion-header" id="headingHel">
+      <button
+        class="my-2 px-2 blue-btn"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseHel"
+        aria-expanded="false"
+        aria-controls="collapseHel"
+      >
+         Question Help
+      </button>
+    </h2>
+    <div
+      id="collapseHel"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingHel"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">
+        <div class="lls-form">
+          <div class="row my-2">
+            <div class="col-md-4">
+              <div class="lls-form-group">
+                <p class="form-label">Help Text:</p>
+                <p class="form-input">{{ data.config.help }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">{{ data.content.data.question }}</div>
+  <form
+    [formGroup]="questionForm"
+    (submit)="$event.preventDefault()"
+    class="lls-form"
+  >
+    <div class="lls-form-group">
+      <label>answer</label>
+      <textarea
+        type="test"
+        formControlName="answer"
+        (input)="setOpenQuestion()"
+      ></textarea>
+    </div>
+  </form>
+</section>
+<!-- <hr> -->

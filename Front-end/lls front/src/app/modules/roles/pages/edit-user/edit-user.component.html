@@ -1,0 +1,98 @@
+<div class="lls-container">
+  <form
+    [formGroup]="UserEditForm"
+    (ngSubmit)="onSubmit()"
+    class="mt-5 lls-form"
+  >
+    <div class="form-content">
+      <div class="row mb-3">
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'firstName'"
+            [label]="'firstName'"
+            [formControl]="formControlData('firstName')"
+            [errorMessages]="errorMessages"
+            [transparent]="true"
+          >
+          </app-inputs>
+        </div>
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'lastName'"
+            [label]="'lastName'"
+            [formControl]="formControlData('lastName')"
+            [errorMessages]="errorMessages"
+            [transparent]="true"
+          >
+          </app-inputs>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4 col-12 lls-form-group">
+          <label class="">gender:</label>
+          <select name="gender" id="gender" #gender formControlName="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="col-md-4 col-12 lls-form-group">
+          <label>Role:</label>
+          <select name="role" id="role" #role formControlName="role">
+            <option [value]="role" *ngFor="let role of allRoles">
+              {{ role }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'country'"
+            [label]="'country'"
+            [formControl]="formControlData('country')"
+            [errorMessages]="errorMessages"
+          >
+          </app-inputs>
+        </div>
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'city'"
+            [label]="'city'"
+            [formControl]="formControlData('city')"
+            [errorMessages]="errorMessages"
+            type="text"
+          >
+          </app-inputs>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'phoneNumber'"
+            [label]="'phoneNumber'"
+            [formControl]="formControlData('phoneNumber')"
+            [errorMessages]="errorMessages"
+          >
+          </app-inputs>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'academicYear'"
+            [label]="'academicYear'"
+            [formControl]="formControlData('academicYear')"
+            [errorMessages]="errorMessages"
+          >
+          </app-inputs>
+        </div>
+      </div>
+
+      <div class="my-3">
+        <div class="btn-container">
+          <button class="blue-btn" type="submit">Submit</button>
+          <app-forms-spinner></app-forms-spinner>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

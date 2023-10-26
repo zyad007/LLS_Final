@@ -1,0 +1,329 @@
+<section class="p-1 my-1 hand" cdkDrag>
+  <!-- <h3 class="blue">Content</h3>
+  <hr> -->
+  <div
+    *ngIf="contentType == authToolService.imageType"
+    class="img-display d-flex justify-content-center flex-column text-center"
+  >
+    <div>
+      <img
+        [src]="data.content.data.url"
+        width="200px"
+        height="200px"
+        [title]="data.content.data.help"
+      />
+    </div>
+    <div class="d-flex justify-content-end align-items-center">
+      <a (click)="editForm()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
+      </a>
+      <a (click)="deleteItem()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-archive"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div
+    *ngIf="contentType == authToolService.videoType"
+    class="img-display d-flex justify-content-center flex-column text-center"
+  >
+    <div *ngIf="data.content.data.url">
+      <video controls width="300px" height="300px">
+        <source [src]="data.content.data.url" />
+      </video>
+    </div>
+    <div class="d-flex justify-content-end align-items-center">
+      <a (click)="editForm()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
+      </a>
+      <a (click)="deleteItem()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-archive"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div
+    *ngIf="contentType == authToolService.iframeType"
+    class="img-display d-flex justify-content-center align-items-center flex-column text-center custom-iframe"
+  >
+    <!-- <iframe *ngIf="data.content.data.iFrame" [src]="iframeURl()"> </iframe> -->
+    <iframe
+      *ngIf="data.content.data.iFrame"
+      width="560"
+      height="315"
+      [src]="iframeURl()"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+    <div class="d-flex justify-content-end align-items-center w-100">
+      <a (click)="editForm()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
+      </a>
+      <a (click)="deleteItem()" class="mx-2 finger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-archive"
+          viewBox="0 0 25 25"
+        >
+          <path
+            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div *ngIf="contentType == authToolService.textType" class="lls-form">
+    <div class="row">
+      <div class="col-md-10">
+        <div
+          class="lls-form-group"
+          stype="background-color:#fff"
+          [innerHTML]="parseHtml()"
+        ></div>
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <a (click)="editForm()" class="mx-2 finger">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-pencil-square"
+            viewBox="0 0 25 25"
+          >
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+            />
+            fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0
+            1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0
+            1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1
+            2.5v11z" />
+          </svg>
+        </a>
+        <a (click)="deleteItem()" class="mx-2 finger">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-archive"
+            viewBox="0 0 25 25"
+          >
+            <path
+              d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="contentType == authToolService.codeType" class="lls-form">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="lls-form-group">
+          <p class="form-label">Language:</p>
+          <p class="form-input">{{ data.content.data.lang }}</p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="lls-form-group">
+          <p class="form-label">Code:</p>
+          <p class="form-input">{{ data.content.data.code }}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <a (click)="editForm()" class="mx-2 finger">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-pencil-square"
+            viewBox="0 0 25 25"
+          >
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+            />
+          </svg>
+        </a>
+        <a (click)="deleteItem()" class="mx-2 finger">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-archive"
+            viewBox="0 0 25 25"
+          >
+            <path
+              d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<p-dialog
+  header="Edit"
+  [(visible)]="display"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+  (onHide)="closePopup()"
+>
+  <div *ngIf="contentType == authToolService.textType">
+    <div class="lls-form">
+      <div class="lls-form-group" *ngIf="htmlEdit">
+        <editor
+          [apiKey]="authToolService.apiKey"
+          [(ngModel)]="htmlEdit"
+          tagName="div"
+          outputFormat="html"
+          [init]="authToolService.configTextEditor"
+        ></editor>
+      </div>
+      <button type="submit" (click)="updateForm()">Edit</button>
+    </div>
+  </div>
+  <div *ngIf="contentType == authToolService.codeType">
+    <form class="lls-form" [formGroup]="codeForm" (ngSubmit)="updateForm()">
+      <div class="lls-form-group">
+        <label>language</label>
+        <input type="text" formControlName="lang" />
+      </div>
+      <div class="lls-form-group">
+        <label>code </label>
+        <textarea type="text" formControlName="code"> </textarea>
+      </div>
+      <button class="" [disabled]="codeForm.invalid" type="submit">Save</button>
+    </form>
+  </div>
+  <div *ngIf="contentType == authToolService.imageType" class="img-display">
+    <p class="mb-2">current image</p>
+    <img
+      [src]="data.content.data.url"
+      width="100px"
+      height="100px"
+      class="my-2"
+    />
+    <div class="lls-form">
+      <div class="lls-form-group">
+        <label>Image Help</label>
+        <input type="text" [(ngModel)]="imageHelp" />
+      </div>
+    </div>
+    <p-fileUpload
+      *ngIf="contentType == authToolService.imageType && enableUpload"
+      accept="image/*"
+      name="myfile[]"
+      [customUpload]="true"
+      (uploadHandler)="uploadFile($event)"
+      [maxFileSize]="3000000"
+    ></p-fileUpload>
+    <div class="lls-form my-2">
+      <button class="" (click)="saveImageHelp()">Save</button>
+    </div>
+  </div>
+  <div
+    *ngIf="contentType == authToolService.videoType && enableUpload"
+    class="img-display"
+  >
+    <p class="mb-2">current video</p>
+    <video controls width="200px" height="200px">
+      <source [src]="data.content.data.url" />
+    </video>
+    <p-fileUpload
+      accept="video/*"
+      name="myfile[]"
+      [customUpload]="true"
+      (uploadHandler)="uploadFile($event)"
+      [maxFileSize]="30000000"
+    ></p-fileUpload>
+    <app-forms-spinner></app-forms-spinner>
+  </div>
+  <div *ngIf="contentType == authToolService.iframeType">
+    <form class="lls-form" [formGroup]="iframeForm" (ngSubmit)="updateForm()">
+      <div class="lls-form-group">
+        <label>Iframe</label>
+        <input type="text" formControlName="iFrame" />
+      </div>
+      <button class="" [disabled]="iframeForm.invalid" type="submit">
+        Save
+      </button>
+    </form>
+  </div>
+</p-dialog>

@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-12 p-0">
+      <div class="bg-account pt-5 px-4">
+        <h3 class="mb-5 cursor" routerLink="/">LLS</h3>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewCourses',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/courses"
+          routerLinkActive="active"
+        >
+          <span>Courses</span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewExp',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/show-ex"
+          routerLinkActive="active"
+        >
+          <span>Experiments </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewAssignedExpCourse_Student',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/assigned-experiment"
+          routerLinkActive="active"
+        >
+          <span>Assigned Experiment </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'SubmitAssignedExp_Student',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/completed-experiment"
+          routerLinkActive="active"
+        >
+          <span>Completed Experiment </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewActiveLab_Teacher',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/lab"
+          routerLinkActive="active"
+        >
+          <span>Active lab sessions </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewAnalytics_Teacher',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/analytics"
+          routerLinkActive="active"
+        >
+          <span>Learning Analytics </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewGradeBooks_Teacher',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/grade-book"
+          routerLinkActive="active"
+        >
+          <span>Grading Book </span>
+        </div>
+        <div
+          *ngIf="
+            authServices.searchStringInArray(
+              'ViewRoles' && 'ViewUsers',
+              authServices.Permissions
+            )
+          "
+          class="perm my-3 py-4 px-2"
+          routerLink="/user/users"
+          routerLinkActive="active"
+        >
+          <span>Users, Permissions & Roles </span>
+        </div>
+        <div class="perm my-3 py-4 px-2 logout" (click)="logOut()">
+          <div class="d-flex align-items-center">
+            <div class="bg-img me-4">
+              <img [src]="authServices.Users?.imageUrl" />
+            </div>
+            <div>
+              <span class="d-block pb-3">{{ authServices.Users?.name }}</span>
+              <small>{{ authServices.Users.role }}</small>
+            </div>
+          </div>
+          <div class="mt-3">
+            <span>LogOut </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10 col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

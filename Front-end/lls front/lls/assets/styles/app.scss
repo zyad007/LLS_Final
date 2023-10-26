@@ -1,0 +1,21 @@
+// colors
+@import "base/colors.scss";
+// fonts
+@import "base/typography.scss";
+// font size
+@import "base/font-size.scss";
+//vendor
+@import "vendor/bootstrap.scss";
+// variables
+@import "abstracts/variables";
+
+// mixins
+@import "abstracts/mixins.scss";
+
+// projects
+@import "components/tables.scss";
+
+// forms
+@import "components/forms.scss";
+//buttons
+@import "components/buttons.scss";

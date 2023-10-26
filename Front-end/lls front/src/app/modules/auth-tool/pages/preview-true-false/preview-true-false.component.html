@@ -1,0 +1,36 @@
+<section class="  my-3 p-4 w-100" >
+    <!-- <h5 class="blue">True or False question</h5> -->
+    <p *ngIf="data.config.help">{{data.config.help}}</p>
+    <div class="">
+      <small *ngIf="data.config.help">({{ data.config.help }})</small>
+      <div
+        class=""
+        *ngFor="let question of data.content.data; let i = index"
+      >
+        <p>{{ question.question }}</p>
+        <div class="d-flex flex-column">
+          <div>
+            <p-radioButton
+              [(ngModel)]="chooices[i]"
+              [inputId]="'answer' + i + 'true'"
+              [name]="'answer' + i"
+              [value]="true"
+              class="mx-1"
+            ></p-radioButton>
+            <label [for]="'answer' + i + 'true'">true</label>
+          </div>
+          <div>
+            <p-radioButton
+              [(ngModel)]="chooices[i]"
+              [inputId]="'answer' + i + 'false'"
+              [name]="'answer' + i"
+              [value]="false"
+              class="mx-1"
+            ></p-radioButton>
+            <label [for]="'answer' + i + 'false'">false</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <hr> -->

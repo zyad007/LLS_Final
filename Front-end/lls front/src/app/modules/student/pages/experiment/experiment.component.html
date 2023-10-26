@@ -1,0 +1,225 @@
+<section
+  class="bg-grey py-4 expirment"
+  *ngIf="studentService.sections.length && studentService.answers.length"
+>
+  <!-- <h5 class="blue mx-3 d-flex justify-content-center">
+    Vrl Active :
+    {{ studentService.sections[currentSectionNumber].vrl.active }}
+  </h5> -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-flex justify-content-between">
+        <!-- <h3 class="blue">
+          Number of sections : {{ studentService.sections.length }}
+        </h3> -->
+        <button (click)="openDialog()" class="my-3 blue-btn">submit</button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <button
+          [disabled]="currentSectionNumber <= 0"
+          (click)="previousSection()"
+          class="blue-btn"
+        >
+          Previous Section
+        </button>
+        <!-- <span class="blue"
+          >active section : {{ currentSectionNumber + 1 }}</span
+        > -->
+        <button
+          [disabled]="
+            currentSectionNumber >= studentService.sections.length - 1
+          "
+          (click)="nextSection()"
+          class="blue-btn"
+        >
+          Next Section
+        </button>
+      </div>
+      <div
+        [ngClass]="{
+          'col-lg-12':
+            !studentService.sections[currentSectionNumber].vrl.active,
+          'col-lg-6':
+            studentService.sections[currentSectionNumber].vrl.active &&
+            studentService.sections[currentSectionNumber].vrl.layout ==
+              layout[1]
+        }"
+      >
+        <!-- *ngFor="let section of studentService.sections;let i=index" -->
+        <div class="drop my-4">
+          <h5 class="blue">
+            {{ studentService.sections[currentSectionNumber].title }}
+          </h5>
+          <!-- <p *ngIf="studentService.sections[currentSectionNumber].config.help">
+            {{ studentService.sections[currentSectionNumber].config.help }}
+          </p> -->
+          <div class="accordion-item my-3" *ngIf="studentService.sections[currentSectionNumber].config.help">
+            <h2 class="accordion-header" id="headingHelp">
+              <button
+                class="my-2 px-2 blue-btn font"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseHelp"
+                aria-expanded="false"
+                aria-controls="collapseHelp"
+              >
+                 Section Help
+              </button>
+            </h2>
+            <div
+              id="collapseHelp"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingHelp"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <div class="lls-form">
+                  <div class="row my-2">
+                    <div class="col-md-4">
+                      <div class="lls-form-group">
+                        <p class="form-label">Help Text:</p>
+                        <p class="form-input">
+                          {{
+                            studentService.sections[currentSectionNumber].config
+                              .help
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              *ngFor="
+                let column of getNumberOfColumns(
+                  studentService.sections[currentSectionNumber].config
+                    .numberOfColumns
+                )
+              "
+              [ngClass]="{
+                'col-lg-4':
+                  studentService.sections[currentSectionNumber].config
+                    .numberOfColumns == 3 &&
+                  studentService.sections[currentSectionNumber].vrl.layout ==
+                    layout[1],
+                'col-lg-6':
+                  studentService.sections[currentSectionNumber].config
+                    .numberOfColumns == 2 &&
+                  studentService.sections[currentSectionNumber].vrl.layout ==
+                    layout[1],
+                'col-lg-12':
+                  (studentService.sections[currentSectionNumber].config
+                    .numberOfColumns == 1 &&
+                    studentService.sections[currentSectionNumber].vrl.layout ==
+                      layout[1]) ||
+                  studentService.sections[currentSectionNumber].vrl.layout ==
+                    layout[0]
+              }"
+            >
+              <div class="border-content my-4 content bg-content">
+                <div>
+                  <div
+                    class="content-or-question-display"
+                    *ngFor="
+                      let typecolumn of studentService.sections[
+                        currentSectionNumber
+                      ]['column' + column];
+                      let createdIndex = index
+                    "
+                  >
+                    <app-content-display
+                      *ngIf="typecolumn.mainType == studentService.contentType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    >
+                    </app-content-display>
+                    <app-true-false-display
+                      *ngIf="typecolumn.type == studentService.trueOrFalseType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-true-false-display>
+                    <app-open-question-display
+                      *ngIf="typecolumn.type == studentService.openQuestionType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-open-question-display>
+                    <app-mcq-single-display
+                      *ngIf="typecolumn.type == studentService.singleMcqType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-mcq-single-display>
+                    <app-mcq-multi-display
+                      *ngIf="typecolumn.type == studentService.multiMcqType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-mcq-multi-display>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="url"
+        [ngClass]="{
+          'show-vrl': studentService.sections[currentSectionNumber].vrl.active,
+          'hide-vrl': !studentService.sections[currentSectionNumber].vrl.active,
+          'col-lg-12':
+            studentService.sections[currentSectionNumber].vrl.active &&
+            studentService.sections[currentSectionNumber].vrl.layout ==
+              layout[0],
+          'col-lg-6 iframe-design ':
+            studentService.sections[currentSectionNumber].vrl.active &&
+            studentService.sections[currentSectionNumber].vrl.layout ==
+              layout[1]
+        }"
+      >
+        <iframe
+          [src]="url"
+          frameborder="0"
+          width="100%"
+          height="400px"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<p-dialog
+  header="Submit Answers"
+  [(visible)]="display"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+>
+  <div class="d-flex justify-content-center flex-column">
+    <h6 class="blue">Are you sure, you want to submit your answers</h6>
+    <button (click)="sendAnswers()" class="blue-btn w-25">submit</button>
+    <app-forms-spinner></app-forms-spinner>
+  </div>
+</p-dialog>
+<p-dialog
+  header="Submit Answers"
+  (onHide)="finishAnswer()"
+  [(visible)]="success"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+>
+  <div class="d-flex justify-content-center">
+    <h6 class="blue">your answers had been submitted</h6>
+  </div>
+</p-dialog>

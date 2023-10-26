@@ -1,0 +1,80 @@
+<div
+  class="lls-container"
+  *ngIf="
+    authServices.searchStringInArray(
+      'AddDeleteEdit_Course',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="CourseEditForm" (ngSubmit)="onSubmit()" class="mt-5">
+        <div class="form-content">
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'name'"
+                [label]="'Name'"
+                [formControl]="formControlData('name')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'code'"
+                [label]="'Code'"
+                [formControl]="formControlData('code')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'description'"
+                [label]="'Description'"
+                [formControl]="formControlData('description')"
+                [errorMessages]="errorMessages"
+              >
+              </app-inputs>
+            </div>
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'startDate'"
+                [label]="'Start Date'"
+                [formControl]="formControlData('startDate')"
+                [errorMessages]="errorMessages"
+                type="date"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'endDate'"
+                [label]="'End Date'"
+                [formControl]="formControlData('endDate')"
+                [errorMessages]="errorMessages"
+                type="date"
+              >
+              </app-inputs>
+            </div>
+          </div>
+
+          <div class="my-3">
+            <div class="btn-container">
+              <button class="blue-btn" type="submit">Submit</button>
+              <app-forms-spinner></app-forms-spinner>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

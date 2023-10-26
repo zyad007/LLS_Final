@@ -1,0 +1,32 @@
+// @mixin background-image {
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//   }
+
+//   @mixin flexCenter() {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+
+//   @mixin yCenter() {
+//     display: flex;
+//     align-items: center;
+//   }
+
+//   @mixin xCenter() {
+//     display: flex;
+//     justify-content: center;
+//   }
+
+//   @mixin between() {
+//     display: flex;
+//     justify-content: space-between;
+//   }
+//   @mixin toRem($property, $value) {
+//     #{$property}: ($value / 16) + rem;
+//   }
+//   @function rem($px){
+//     @return ($px/16px)+rem;
+//   }

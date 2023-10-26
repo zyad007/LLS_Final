@@ -1,0 +1,47 @@
+@import "../base/typography";
+@import "../abstracts/mixins";
+@import "../base/colors";
+
+// Blue button style start here
+.blue-btn,
+.grey-btn {
+  // font-family: $regular;
+  border: none;
+  padding: 0.6rem 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  // border-radius: 5px;
+  width: auto;
+
+  &:disabled {
+    opacity: 0.4;
+    // outline: none;
+    // transform: translateY(-1px);
+    // box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  }
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
+}
+.blue-btn {
+  background-color: $blue;
+  color: $white;
+}
+.grey-btn {
+  background-color: rgba($blue, 10%);
+  color: $blue;
+  font-size: 0.875rem; //14px
+  padding: 0.4rem 1rem;
+  margin: 0.7rem 0.5rem;
+}
+.bg-blue-active {
+  background-color: $blue;
+  color: $white;
+}
+// Blue button style Arabic start here
+
+.rtl {
+  .blue-btn,
+  .white-btn {
+    // font-family: $Ca-regular;
+  }
+}

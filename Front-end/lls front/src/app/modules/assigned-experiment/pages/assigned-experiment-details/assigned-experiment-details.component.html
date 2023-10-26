@@ -1,0 +1,106 @@
+<div
+  class="lls-container mt-5"
+  *ngIf="
+    authServices.searchStringInArray(
+      'ViewAssignedExpCourse_Student',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="row mt-5">
+    <div class="col-lg-6 col-12">
+      <div class="">
+        <div class="d-flex align-items-center">
+          <h6
+            class="blue bold cursor mb-0"
+            routerLink="/user/assigned-experiment"
+          >
+            Assigned Experiment/
+          </h6>
+          <h6 class="grey regular mb-0 mx-2">{{ data.name }}</h6>
+        </div>
+        <h3 class="black bold mb-5 mt-3">{{ data.name }}</h3>
+      </div>
+      <div class="my-3">
+        <div class="d-flex align-items-center my-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+            />
+          </svg>
+          <p class="black regular mx-2 mb-0">
+            Start Date :{{ data.startDate | date }}
+          </p>
+        </div>
+        <div class="d-flex align-items-center my-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+            />
+          </svg>
+          <p class="black regular mx-2 mb-0">
+            End Date :{{ data.endDate | date }}
+          </p>
+        </div>
+        <div class="d-flex align-items-center my-2">
+          <p class="black regular mx-2 mb-0">
+            {{ data.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h4 class="blue bold py-3">Please select Day:</h4>
+    <div class="col-lg-2 col-12 my-2" *ngFor="let day of weekDays">
+      <div class="">
+        <button class="blue-btn bg-light-blue black" (click)="selectDay(day)">
+          {{ day | date }}
+        </button>
+        <app-forms-spinner></app-forms-spinner>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12">
+      <h4 class="blue bold py-3">Please select Time:</h4>
+
+      <div class="d-flex justify-content-around">
+        <ng-container *ngFor="let oneTime of time">
+          <button
+            class="blue-btn bg-danger px-2 mx-2"
+            *ngIf="!oneTime.reserved"
+            (click)="selectTime(oneTime.slotId)"
+          >
+            <!-- {{ oneTime.slotId }} -->
+            From {{ oneTime.start }} To {{ oneTime.end }}
+          </button>
+          <button
+            class="blue-btn bg-green px-2 mx-2"
+            *ngIf="oneTime.reserved"
+            [disabled]="oneTime.reserved"
+          >
+            <!-- {{ oneTime.slotId }} -->
+            From {{ oneTime.start }} To {{ oneTime.end }}
+
+          </button>
+          <app-forms-spinner></app-forms-spinner>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section class="my-3 p-4 w-100">
+  <p *ngIf="data.config.help">{{ data.config.help }}</p>
+  <div class="">
+    {{ data.content.data.question }} (
+    <span class="blue">{{ data.content.data.score }}</span>
+    )
+  </div>
+  <div class="lls-form-group" *ngIf="!isAvg">
+    <label>answer</label>
+    <p *ngIf="anwser">{{ anwser }}</p>
+    <p *ngIf="!anwser">there is no anwser</p>
+  </div>
+
+  <div class="lls-form my-3" *ngIf="isAvg">
+    <h5>
+      average :<span class="blue"> {{ data.avg }}</span>
+    </h5>
+  </div>
+</section>

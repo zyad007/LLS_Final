@@ -1,0 +1,141 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'AssignExpToCourse',
+      authServices.Permissions
+    )
+  "
+>
+  <div *ngIf="!isExperiment">
+    <div *ngIf="currentPageNumber$ | async as currentPageNumber">
+      <div
+        class="lls-container mt-5"
+        *ngIf="ExperimentsList$ | async as Experiments"
+      >
+        <div class="row my-5">
+          <div class="col-12">
+            <div class="table-lls mt-5 w-100">
+              <div class="d-flex justify-content-end">
+                <button class="blue-btn mb-2" (click)="addExperiment()">
+                  Assign Experiment
+                </button>
+              </div>
+              <table>
+                <tr>
+                  <th>Id</th>
+                  <th>Experiment Name</th>
+                  <th>Author Name</th>
+                </tr>
+                <tr *ngFor="let course of Experiments">
+                  <td>
+                    <input
+                      type="checkbox"
+                      *ngIf="isCheckBoxExperiment"
+                      (input)="assignExperiment(course.idd)"
+                    />
+
+                    {{ course.idd | sub }}
+                  </td>
+                  <td>{{ course.name }}</td>
+                  <td>{{ course.authorName }}</td>
+                </tr>
+              </table>
+              <div
+                class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+              >
+                <div>showing 1 to 10 </div>
+                <nav
+                  aria-label="Page navigation example  "
+                  class="page my-2"
+                  *ngIf="ExperimentsPageNumber$ | async as pages"
+                >
+                  <ul
+                    class="pagination d-flex justify-content-center"
+                    *ngIf="pages.length"
+                  >
+                    <li class="page-item">
+                      <a
+                        (click)="paginate(currentPageNumber - 1, pages)"
+                        class="page-link blue cursor"
+                        [ngClass]="{ blueLight: currentPageNumber <= 1 }"
+                      >
+                        previous
+                      </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages">
+                      <a
+                        *ngIf="page <= 5"
+                        (click)="paginate(page, pages)"
+                        class="page-link orange cursor"
+                        [ngClass]="{ active: page === currentPageNumber }"
+                        >{{ page }}</a
+                      >
+                    </li>
+                    <li class="page-item">
+                      <a
+                        (click)="paginate(currentPageNumber + 1, pages)"
+                        class="page-link blue cursor"
+                        [ngClass]="{
+                          blueLight: currentPageNumber >= pages.length
+                        }"
+                      >
+                        next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="" *ngIf="isExperiment">
+    <form [formGroup]="experimentForm" (ngSubmit)="onSubmit()" class="mt-5">
+      <div class="form-content">
+        <div class="row mb-3">
+          <div class="col-md-4 col-12">
+            <app-inputs
+              [formControlName]="'numberOfTrials'"
+              [label]="'Number Of Trials'"
+              [formControl]="formControlData('numberOfTrials')"
+              [errorMessages]="errorMessages"
+              [transparent]="true"
+            >
+            </app-inputs>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 col-12">
+            <app-inputs
+              [formControlName]="'startDate'"
+              [label]="'Start Date'"
+              [formControl]="formControlData('startDate')"
+              [errorMessages]="errorMessages"
+              type="date"
+            >
+            </app-inputs>
+          </div>
+          <div class="col-md-4 col-12">
+            <app-inputs
+              [formControlName]="'endDate'"
+              [label]="'End Date'"
+              [formControl]="formControlData('endDate')"
+              [errorMessages]="errorMessages"
+              type="date"
+            >
+            </app-inputs>
+          </div>
+        </div>
+
+        <div class="my-3">
+          <div class="btn-container">
+            <button class="blue-btn" type="submit">Submit</button>
+            <app-forms-spinner></app-forms-spinner>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

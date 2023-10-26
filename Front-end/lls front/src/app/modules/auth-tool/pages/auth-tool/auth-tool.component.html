@@ -1,0 +1,506 @@
+<div class="container-fluid">
+  <div class="row my-5">
+    <div class="col-xl-3">
+      <div class="types">
+        <div class="content">
+          <p-panel
+            header="Content"
+            [collapsed]="false"
+            [toggleable]="true"
+            class="panel-faq"
+          >
+            <ul
+              class="border"
+              *ngFor="let cont of content"
+              pDraggable="content"
+              (onDragStart)="
+                dragStart($event, cont.text, authToolService.contentType)
+              "
+            >
+              <li class="d-flex align-items-center mb-1">
+                <i [class]="cont.icon"></i> {{ cont.display }}
+              </li>
+            </ul>
+          </p-panel>
+        </div>
+        <div class="question">
+          <p-panel
+            header="Question"
+            [collapsed]="false"
+            [toggleable]="true"
+            class="panel-faq"
+          >
+            <ul
+              class="border"
+              *ngFor="let question of Questions"
+              pDraggable="question"
+              (onDragStart)="
+                dragStart($event, question.text, authToolService.questionType)
+              "
+            >
+              <li class="d-flex align-items-center mb-1">
+                <i [class]="question.icon"></i> {{ question.text }}
+              </li>
+            </ul>
+          </p-panel>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <button (click)="createExam()" class="blue-btn m-1 px-1 text-nowrap">
+            Create Experiment
+          </button>
+          <app-forms-spinner></app-forms-spinner>
+          <button (click)="showPreview()" class="blue-btn m-3">Preview</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9">
+      <div class="d-flex justify-content-end">
+        <button (click)="openPopUp()" class="blue-btn">Add Section</button>
+      </div>
+      <div
+        class="drop my-3"
+        *ngFor="let section of authToolService.sections; let i = index"
+      >
+        <div class="section-box">
+          <div class="bg-grey p-3">
+            <div class="lls-form">
+              <a (click)="deleteSection(i)" class="d-flex justify-content-end">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class="bi bi-archive"
+                  viewBox="0 0 25 25"
+                >
+                  <path
+                    d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+                  />
+                </svg>
+              </a>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="my-2"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Configration
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Title:</p>
+                          <p class="form-input">
+                            {{ section.title }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                      <h4 class="my-2 blue">Configration</h4>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Number of columns:</p>
+                          <p class="form-input">
+                            {{ section.config.numberOfColumns }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Answering Time(Minutes):</p>
+                          <p class="form-input">
+                            {{ section.config.answeringTime }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Help Text:</p>
+                          <p class="form-input">
+                            {{ section.config.help }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">show Countdown:</p>
+                          <p class="form-input">
+                            {{ section.config.showCountdown }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Active:</p>
+                          <p class="form-input">
+                            {{ section.vrl.active }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Resources:</p>
+                          <p class="form-input">
+                            {{ section.vrl.resources }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">Layout:</p>
+                          <p class="form-input">
+                            {{ section.vrl.layout }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="lls-form-group">
+                          <p class="form-label">show Screen ShotButton:</p>
+                          <p class="form-input">
+                            {{ section.vrl.showScreenShotButton }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" [id]="'section' + i + 'section'">
+              <div
+                *ngFor="
+                  let column of getNumberOfColumns(
+                    section.config.numberOfColumns
+                  )
+                "
+                [ngClass]="{
+                  'col-lg-4':
+                    section.config.numberOfColumns == 3 &&
+                    section.vrl.layout == layout[1],
+                  'col-lg-6':
+                    section.config.numberOfColumns == 2 &&
+                    section.vrl.layout == layout[1],
+                  'col-lg-12':
+                    (section.config.numberOfColumns == 1 &&
+                      section.vrl.layout == layout[1]) ||
+                    section.vrl.layout == layout[0]
+                }"
+              >
+                <div
+                  class="border-content my-4 content"
+                  (drop)="dragEnterSection($event, section.index, column)"
+                  (dragover)="allowDrop($event)"
+                >
+                  <div
+                    (cdkDropListDropped)="
+                      drangAndDropContent($event, i, column)
+                    "
+                    cdkDropList
+                  >
+                    <div
+                      class="content-or-question-display p-1 my-2"
+                      *ngFor="
+                        let typecolumn of section['column' + column];
+                        let createdIndex = index
+                      "
+                    >
+                      <app-content-display
+                        *ngIf="
+                          typecolumn.mainType == authToolService.contentType
+                        "
+                        [sectionIndex]="i"
+                        [columnIndex]="column"
+                        [pushedIndex]="createdIndex"
+                        [data]="typecolumn"
+                      >
+                      </app-content-display>
+                      <app-true-false-display
+                        *ngIf="
+                          typecolumn.type == authToolService.trueOrFalseType
+                        "
+                        [sectionIndex]="i"
+                        [columnIndex]="column"
+                        [pushedIndex]="createdIndex"
+                        [data]="typecolumn"
+                      ></app-true-false-display>
+                      <app-open-question-display
+                        *ngIf="
+                          typecolumn.type == authToolService.openQuestionType
+                        "
+                        [sectionIndex]="i"
+                        [columnIndex]="column"
+                        [pushedIndex]="createdIndex"
+                        [data]="typecolumn"
+                      ></app-open-question-display>
+                      <app-mcq-single-display
+                        *ngIf="typecolumn.type == authToolService.singleMcqType"
+                        [sectionIndex]="i"
+                        [columnIndex]="column"
+                        [pushedIndex]="createdIndex"
+                        [data]="typecolumn"
+                      ></app-mcq-single-display>
+                      <app-mcq-multi-display
+                        *ngIf="typecolumn.type == authToolService.multiMcqType"
+                        [sectionIndex]="i"
+                        [columnIndex]="column"
+                        [pushedIndex]="createdIndex"
+                        [data]="typecolumn"
+                      ></app-mcq-multi-display>
+                    </div>
+                  </div>
+                  <div
+                    class="content-or-question"
+                    *ngFor="
+                      let typecolumn of section['columnFrom' + column];
+                      let toCreateIndex = index
+                    "
+                  >
+                    <app-content
+                      *ngIf="typecolumn.text == authToolService.contentType"
+                      [contentType]="typecolumn.type"
+                      [sectionIndex]="i"
+                      [columnIndex]="column"
+                      [pushedIndex]="toCreateIndex"
+                    ></app-content>
+                    <app-true-false
+                      *ngIf="
+                        typecolumn.text == authToolService.questionType &&
+                        typecolumn.type == trueAndFalse
+                      "
+                      [sectionIndex]="i"
+                      [columnIndex]="column"
+                      [pushedIndex]="toCreateIndex"
+                    ></app-true-false>
+                    <app-mcq-single
+                      *ngIf="
+                        typecolumn.text == authToolService.questionType &&
+                        typecolumn.type == singleSelectMSQ
+                      "
+                      [sectionIndex]="i"
+                      [columnIndex]="column"
+                      [pushedIndex]="toCreateIndex"
+                    ></app-mcq-single>
+                    <app-mcq-multi
+                      *ngIf="
+                        typecolumn.text == authToolService.questionType &&
+                        typecolumn.type == multileSelectMSQ
+                      "
+                      [sectionIndex]="i"
+                      [columnIndex]="column"
+                      [pushedIndex]="toCreateIndex"
+                    ></app-mcq-multi>
+                    <app-open-question
+                      *ngIf="
+                        typecolumn.text == authToolService.questionType &&
+                        typecolumn.type == openQuestion
+                      "
+                      [sectionIndex]="i"
+                      [columnIndex]="column"
+                      [pushedIndex]="toCreateIndex"
+                    ></app-open-question>
+                  </div>
+                  <div
+                    (dragover)="allowDrop($event)"
+                    (drop)="dragEnterSection($event, section.index, column)"
+                    class="w-1o my-5 d-flex align-items-center justify-content-center"
+                  >
+                    <span> Drop here </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+    <p-dialog
+      header="Add Section"
+      [(visible)]="display"
+      [draggable]="false"
+      [modal]="true"
+      [style]="{ width: '60vw' }"
+      (onHide)="closeDialog()"
+    >
+      <div *ngIf="sectionForm">
+        <form
+          class="lls-form"
+          [formGroup]="sectionForm"
+          (ngSubmit)="createSection()"
+        >
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>title</label>
+                  <input type="text" formControlName="title" />
+                  <div
+                    *ngIf="
+                      sectionForm.get('title')?.invalid &&
+                      sectionForm.get('title')?.touched
+                    "
+                    class="errors-container"
+                  >
+                    <span
+                      *ngIf="formControls['title'].errors?.['required']"
+                      class="errors cairo-regular"
+                    >
+                      title is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <h4>Configration</h4>
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>Number of columns</label>
+                  <select type="text" formControlName="numberOfColumns">
+                    <option *ngFor="let num of numberOfColumns" [value]="num">
+                      {{ num }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      sectionForm.get('numberOfColumns')?.invalid &&
+                      sectionForm.get('numberOfColumns')?.touched
+                    "
+                    class="errors-container"
+                  >
+                    <span
+                      *ngIf="formControls['numberOfColumns'].errors?.['required']"
+                      class="errors cairo-regular"
+                    >
+                      number of columns is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>Answering time</label>
+                  <input type="text" formControlName="answeringTime" />
+                  <div
+                    *ngIf="
+                      sectionForm.get('answeringTime')?.invalid &&
+                      sectionForm.get('answeringTime')?.touched
+                    "
+                    class="errors-container"
+                  >
+                    <span
+                      *ngIf="formControls['answeringTime'].errors?.['pattern']"
+                      class="errors cairo-regular"
+                    >
+                      answering time must be number
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>Help Text</label>
+                  <textarea type="text" formControlName="help"> </textarea>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="my-4">
+                  <input type="checkbox" formControlName="showCountdown" />
+                  <label class="mx-2"> show count down </label>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <h4>VRL</h4>
+              <div class="col-lg-6">
+                <div class="my-4">
+                  <input type="checkbox" formControlName="active" />
+                  <label class="mx-2">active</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>resources</label>
+                  <select type="text" formControlName="resources">
+                    <option
+                      *ngFor="let resource of resources"
+                      [value]="resource"
+                    >
+                      {{ resource }}
+                    </option>
+                  </select>
+                  <div *ngIf="notValidResource" class="errors-container">
+                    <span *ngIf="notValidResource" class="errors cairo-regular">
+                      resources and active is required
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="my-4">
+                  <input
+                    type="checkbox"
+                    formControlName="showScreenShotButton"
+                  />
+                  <label class="mx-2">Show screen shot button</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="lls-form-group">
+                  <label>layout</label>
+                  <select type="text" formControlName="layout">
+                    <option *ngFor="let theme of layout" [value]="theme">
+                      {{ theme }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button
+                  class=""
+                  [disabled]="sectionForm.invalid || notValidResource"
+                  type="submit"
+                >
+                  Add Section
+                </button>
+                <app-forms-spinner></app-forms-spinner>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </p-dialog>
+    <p-dialog
+      header="Preview"
+      [(visible)]="previewDisplay"
+      [draggable]="false"
+      [modal]="true"
+      [style]="{ width: '100vw', height: '100vh' }"
+      [maximizable]="true"
+    >
+      <app-preview [sections]="authToolService.sections"></app-preview>
+    </p-dialog>
+  </div>
+</div>

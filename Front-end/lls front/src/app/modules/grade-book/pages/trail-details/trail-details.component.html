@@ -1,0 +1,163 @@
+<section
+  class="bg-grey py-4 expirment"
+  *ngIf="gradingService.sections.length && gradingService.answers.length"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-flex justify-content-between">
+        <div>
+          <button (click)="openDialog()" class="my-3 blue-btn">submit</button>
+          <span class="text-danger mx-2" *ngIf="emptyScore"
+            >all scores are required</span
+          >
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <button
+          [disabled]="currentSectionNumber <= 0"
+          (click)="previousSection()"
+          class="blue-btn"
+        >
+          Previous Section
+        </button>
+        <button
+          [disabled]="
+            currentSectionNumber >= gradingService.sections.length - 1
+          "
+          (click)="nextSection()"
+          class="blue-btn"
+        >
+          Next Section
+        </button>
+      </div>
+      <div>
+        <div class="drop my-4">
+          <h5 class="blue">
+            {{ gradingService.sections[currentSectionNumber].title }}
+          </h5>
+          <p *ngIf="gradingService.sections[currentSectionNumber].config.help">
+            {{ gradingService.sections[currentSectionNumber].config.help }}
+          </p>
+          <div class="row">
+            <div
+              *ngFor="
+                let column of getNumberOfColumns(
+                  gradingService.sections[currentSectionNumber].config
+                    .numberOfColumns
+                )
+              "
+              [ngClass]="{
+                'col-lg-4':
+                  gradingService.sections[currentSectionNumber].config
+                    .numberOfColumns == 3 &&
+                  gradingService.sections[currentSectionNumber].vrl.layout ==
+                    layout[1],
+                'col-lg-6':
+                  gradingService.sections[currentSectionNumber].config
+                    .numberOfColumns == 2 &&
+                  gradingService.sections[currentSectionNumber].vrl.layout ==
+                    layout[1],
+                'col-lg-12':
+                  (gradingService.sections[currentSectionNumber].config
+                    .numberOfColumns == 1 &&
+                    gradingService.sections[currentSectionNumber].vrl.layout ==
+                      layout[1]) ||
+                  gradingService.sections[currentSectionNumber].vrl.layout ==
+                    layout[0]
+              }"
+            >
+              <div class="border-content my-4 content bg-content">
+                <div>
+                  <div
+                    class="content-or-question-display"
+                    *ngFor="
+                      let typecolumn of gradingService.sections[
+                        currentSectionNumber
+                      ]['column' + column];
+                      let createdIndex = index
+                    "
+                  >
+                    <app-grading-content
+                      *ngIf="typecolumn.mainType == gradingService.contentType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    >
+                    </app-grading-content>
+                    <app-true-false-by-answer
+                      *ngIf="typecolumn.type == gradingService.trueOrFalseType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-true-false-by-answer>
+                    <app-open-by-answer
+                      *ngIf="typecolumn.type == gradingService.openQuestionType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-open-by-answer>
+                    <app-mcq-single-by-answer
+                      *ngIf="typecolumn.type == gradingService.singleMcqType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-mcq-single-by-answer>
+                    <app-mcq-multi-by-answer
+                      *ngIf="typecolumn.type == gradingService.multiMcqType"
+                      [sectionIndex]="currentSectionNumber"
+                      [columnIndex]="column"
+                      [pushedIndex]="createdIndex"
+                      [data]="typecolumn"
+                    ></app-mcq-multi-by-answer>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<p-dialog
+  header="Submit Answers"
+  [(visible)]="display"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+>
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <h6 class="blue">Are you sure, you want to submit your answers</h6>
+    <h6 class="blue">Please write your overall feedback</h6>
+    <div class="lls-form w-100">
+      <div class="lls-form-group">
+        <textarea [(ngModel)]="overallFeedback" required> </textarea>
+      </div>
+    </div>
+    <button
+      (click)="sendAnswers()"
+      [disabled]="!overallFeedback"
+      class="blue-btn w-25"
+    >
+      submit
+    </button>
+    <app-forms-spinner></app-forms-spinner>
+  </div>
+</p-dialog>
+<p-dialog
+  header="Submit Answers"
+  (onHide)="finishAnswer()"
+  [(visible)]="success"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+>
+  <div class="d-flex justify-content-center align-items-center flex-column">
+    <h6 class="blue">your data had been submitted</h6>
+    <button (click)="finishAnswer()" class="blue-btn w-25">Ok</button>
+  </div>
+</p-dialog>

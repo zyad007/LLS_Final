@@ -1,0 +1,68 @@
+<section class="my-3 p-4 w-100">
+  <!-- <h5 class="blue">True or False question</h5> -->
+  <!-- <p *ngIf="data.config.help">{{data.config.help}}</p> -->
+  <div class="accordion-item my-3">
+    <h2 class="accordion-header" id="headingHelpp">
+      <button
+        class="my-2 px-2 blue-btn"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseHelpp"
+        aria-expanded="false"
+        aria-controls="collapseHelpp"
+      >
+         Question Help
+      </button>
+    </h2>
+    <div
+      id="collapseHelpp"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingHelpp"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">
+        <div class="lls-form">
+          <div class="row my-2">
+            <div class="col-md-4">
+              <div class="lls-form-group">
+                <p class="form-label">Help Text:</p>
+                <p class="form-input">{{ data.config.help }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <small *ngIf="data.config.help">({{ data.config.help }})</small>
+    <div class="" *ngFor="let question of data.content.data; let i = index">
+      <p>{{ question.question }}</p>
+      <div class="d-flex flex-column">
+        <div>
+          <p-radioButton
+            (onClick)="setTrueOrFalse(i)"
+            [(ngModel)]="chooices[i]"
+            [inputId]="'answer' + i + 'true'"
+            [name]="'answer' + i"
+            [value]="true"
+            class="mx-1"
+          ></p-radioButton>
+          <label [for]="'answer' + i + 'true'">true</label>
+        </div>
+        <div>
+          <p-radioButton
+            (onClick)="setTrueOrFalse(i)"
+            [(ngModel)]="chooices[i]"
+            [inputId]="'answer' + i + 'false'"
+            [name]="'answer' + i"
+            [value]="false"
+            class="mx-1"
+          ></p-radioButton>
+          <label [for]="'answer' + i + 'false'">false</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <hr> -->

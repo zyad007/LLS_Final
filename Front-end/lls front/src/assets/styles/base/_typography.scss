@@ -1,0 +1,20 @@
+
+
+@font-face {
+  font-family: "roboto";
+  src: url("../../fonts/reboto/Roboto-Regular.eot"),
+    url("../../fonts/reboto/Roboto-Regular.woff2") format("woff2"),
+    url("../../fonts/reboto/Roboto-Regular.woff") format("woff"),
+    url("../../fonts/reboto/Roboto-Regular.ttf") format("truetype");
+}
+
+/* Montserrat  Font Family */
+$E-m-regular: "roboto", sans-serif;
+
+
+.regular {
+  font-family: $E-m-regular;
+}
+
+
+

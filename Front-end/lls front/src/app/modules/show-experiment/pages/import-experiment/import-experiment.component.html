@@ -1,0 +1,23 @@
+<div
+  class="lls-container"
+  *ngIf="
+    authServices.searchStringInArray(
+      'AddDeleteEdit_Exp',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="row">
+    <div class="col-lg-12">
+      <h6 *ngIf="errorMessge" class="text-danger bold">Is not a vaild file</h6>
+      <p-fileUpload
+        accept="text/*"
+        name="myfile[]"
+        [customUpload]="true"
+        (uploadHandler)="uploadFile($event)"
+        [maxFileSize]="3000000"
+      ></p-fileUpload>
+      <app-forms-spinner></app-forms-spinner>
+    </div>
+  </div>
+</div>

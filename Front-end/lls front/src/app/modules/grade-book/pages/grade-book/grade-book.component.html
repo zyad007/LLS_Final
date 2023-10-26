@@ -1,0 +1,95 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'ViewGradeBooks_Teacher',
+      authServices.Permissions
+    )
+  "
+>
+  <div *ngIf="currentPageNumber$ | async as currentPageNumber">
+    <div class="lls-container mt-5" *ngIf="coursesList$ | async as courses">
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="table-lls my-5">
+            <table>
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Course Name</th>
+                <th># Of Student</th>
+                <th># Of Experiments</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let course of courses">
+                <!-- <td>{{ course.idd }}</td> -->
+                <td>{{ course.name }}</td>
+                <td>{{ course.numberOfStudents }}</td>
+                <td>{{ course.numberOfExp }}</td>
+                <td>{{ course.startDate | date }}</td>
+                <td>{{ course.endDate | date }}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <a
+                      class="blue cursor text-decoration-none"
+                      routerLink="gr-details/{{ course.idd }}"
+                    >
+                      View
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div
+              class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+            >
+              <div>showing 1 to 10  </div>
+
+              <div class="">
+                <nav
+                  aria-label="Page navigation example  "
+                  class="page my-2"
+                  *ngIf="CoursesPageNumber$ | async as pages"
+                >
+                  <ul
+                    class="pagination d-flex justify-content-center"
+                    *ngIf="pages.length"
+                  >
+                    <li class="page-item">
+                      <a
+                        (click)="paginate(currentPageNumber - 1, pages)"
+                        class="page-link blue cursor"
+                        [ngClass]="{ blueLight: currentPageNumber <= 1 }"
+                      >
+                        previous
+                      </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages">
+                      <a
+                        (click)="paginate(page, pages)"
+                        class="page-link orange cursor"
+                        [ngClass]="{ active: page === currentPageNumber }"
+                        >{{ page }}</a
+                      >
+                    </li>
+                    <li class="page-item">
+                      <a
+                        (click)="paginate(currentPageNumber + 1, pages)"
+                        class="page-link blue cursor"
+                        [ngClass]="{
+                          blueLight: currentPageNumber >= pages.length
+                        }"
+                      >
+                        next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

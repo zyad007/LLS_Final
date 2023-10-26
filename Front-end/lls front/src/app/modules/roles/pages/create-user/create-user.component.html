@@ -1,0 +1,163 @@
+<div class="lls-container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex align-items-center">
+        <h6 class="blue mb-0">User</h6>
+        <p class="mb-0">/New User</p>
+      </div>
+      <div class="my-3">
+        <h4 class="black">New User</h4>
+      </div>
+      <form
+        [formGroup]="userForm"
+        (ngSubmit)="onSubmit()"
+        class="mt-5 lls-form"
+      >
+        <div class="form-content">
+          <div class="row">
+            <p class="text-danger bold my-2" *ngIf="errorMessge">
+              image is required
+            </p>
+            <div class="col-md-8 col-12" *ngIf="!imageUrl">
+              <div class="lls-form-group">
+                <label>Your Photo:</label>
+
+                <p-fileUpload
+                  accept="image/*"
+                  name="myfile[]"
+                  [customUpload]="true"
+                  (uploadHandler)="uploadFile($event)"
+                  [maxFileSize]="3000000"
+                ></p-fileUpload>
+                <app-forms-spinner></app-forms-spinner>
+              </div>
+            </div>
+            <div class="col-md-4 col-12" *ngIf="imageUrl">
+              <div class="lls-form-group">
+                <label>Your Photo:</label>
+                <div class="img-profile">
+                  <img [src]="imageUrl" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'firstName'"
+                [label]="'First Name'"
+                [formControl]="formControlData('firstName')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'lastName'"
+                [label]="'Last Name'"
+                [formControl]="formControlData('lastName')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'email'"
+                [label]="'email'"
+                [formControl]="formControlData('email')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+            <div class="col-md-4 col-12 lls-form-group">
+              <label>Role:</label>
+              <select name="role" id="role" formControlName="role">
+                <option [value]="role" *ngFor="let role of allRoles">
+                  {{ role }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'country'"
+                [label]="'country'"
+                [formControl]="formControlData('country')"
+                [errorMessages]="errorMessages"
+              >
+              </app-inputs>
+            </div>
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'city'"
+                [label]="'city'"
+                [formControl]="formControlData('city')"
+                [errorMessages]="errorMessages"
+                type="text"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'phoneNumber'"
+                [label]="'Phone Number'"
+                [formControl]="formControlData('phoneNumber')"
+                [errorMessages]="errorMessages"
+              >
+              </app-inputs>
+            </div>
+
+            <div class="col-md-4 col-12 lls-form-group">
+              <app-inputs
+                [formControlName]="'academicYear'"
+                [label]="'Academic Year'"
+                [formControl]="formControlData('academicYear')"
+                [errorMessages]="errorMessages"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12 lls-form-group">
+              <label class="">gender:</label>
+              <select
+                name="gender"
+                id="gender"
+                #gender
+                formControlName="gender"
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'password'"
+                [label]="'password'"
+                [formControl]="formControlData('password')"
+                [errorMessages]="errorMessages"
+                [type]="'password'"
+              >
+              </app-inputs>
+            </div>
+          </div>
+
+          <div class="my-3">
+            <div class="btn-container">
+              <button class="blue-btn" type="submit">Submit</button>
+              <app-forms-spinner></app-forms-spinner>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

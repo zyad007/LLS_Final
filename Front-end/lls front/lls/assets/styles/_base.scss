@@ -1,0 +1,73 @@
+@import "./app.scss";
+.hand {
+  cursor: grabbing;
+}
+.finger {
+  cursor: pointer;
+}
+.read-only {
+  .tox-statusbar {
+    display: none !important;
+  }
+}
+
+.tox-statusbar__branding {
+  display: none !important;
+}
+table {
+  tr,
+  td,
+  th {
+    border: 1px solid darkgray;
+  }
+}
+
+h1,
+h2,
+h3,
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.cursor {
+  cursor: pointer;
+}
+// // all global classes
+.lls-container {
+  padding-left: 3.729vw;
+  padding-right: 3.729vw;
+}
+.search-input {
+  width: 15rem;
+  padding: 0.2rem 1rem;
+  border: 1px solid darkgray;
+  input {
+    border: 0;
+    outline: none;
+  }
+}
+// scrolling bar
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $blue;
+}
+
+::-webkit-scrollbar-track {
+  background: $white;
+}

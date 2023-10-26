@@ -1,0 +1,24 @@
+@import "../../../../../assets/styles/base/colors";
+.show-vrl {
+  display: block !important;
+}
+.hide-vrl {
+  display: none !important;
+}
+.bg-grey {
+  background-color: rgba($white100,100%);
+}
+.expirment{
+  min-height: 100vh;
+}
+.iframe-design{
+  position: fixed;
+  top:36%;
+  right: 0;
+  iframe{
+    width: 100%;
+  }
+}
+.font{
+  font-size: 16px;
+}

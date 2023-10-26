@@ -1,0 +1,28 @@
+<div>
+  <div class="lls-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center w-50 mt-4">
+          <button
+            class="blue-btn bg-light-blue px-3 py-1 black"
+            (click)="isExperiment()"
+          >
+            Experiments
+          </button>
+          <button
+            class="blue-btn bg-light-blue px-3 py-1 black mx-5"
+            (click)="isCourse()"
+          >
+            Courses
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="" *ngIf="analyticsServices.isExperiment">
+    <app-analytics></app-analytics>
+  </div>
+  <div class="" *ngIf="analyticsServices.isCourse">
+    <app-analyticss-course></app-analyticss-course>
+  </div>
+</div>

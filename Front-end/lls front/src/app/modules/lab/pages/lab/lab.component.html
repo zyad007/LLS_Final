@@ -1,0 +1,104 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'ViewActiveLab_Teacher',
+      authServices.Permissions
+    )
+  "
+>
+  <div>
+    <div class="lls-container mt-5" *ngIf="LabsList$ as Labs">
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-around">
+            <h6 class="bold black mb-0 me-3">Filter By:</h6>
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByname
+                class=""
+                placeholder="filter by course name"
+                (change)="searchByName(searchByname.value)"
+              />
+            </div>
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByAcademicyear
+                class=""
+                placeholder="filter by academic year"
+                (change)="searchByAcademicYear(searchByAcademicyear.value)"
+              />
+            </div>
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByCoursename
+                class=""
+                placeholder="filter by experiment name"
+                (change)="searchByCourseName(searchByCoursename.value)"
+              />
+            </div>
+          </div>
+          <div class="table-lls my-5">
+            <table>
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Email</th>
+                <th>Student Name</th>
+                <th>Experiment Name</th>
+                <th>Course Name</th>
+                <th>Academic year</th>
+                <th>progress</th>
+                <th>startedAt</th>
+                <th>status</th>
+              </tr>
+              <tr *ngFor="let Lab of Labs">
+                <!-- <td>{{ Lab.id }}</td> -->
+                <td>{{ Lab.email }}</td>
+                <td>{{ Lab.name }}</td>
+                <td>{{ Lab.experimentName }}</td>
+                <td>{{ Lab.courseName }}</td>
+                <td>{{ Lab?.academicYear }}</td>
+                <td>
+                  <!-- {{ Lab.progress }} -->
+                  <p-progressBar [value]="Lab.progress"></p-progressBar>
+                </td>
+                <td>{{ Lab.startedAt }}</td>
+                <td>{{ Lab.status }}</td>
+              </tr>
+            </table>
+            <div
+              class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+            >
+              <div>showing 1 to 10 </div>
+
+              <div class="">
+            
+                  <ul
+                    class="pagination d-flex justify-content-center"
+                  >
+                    <li class="page-item" *ngIf="pervious">
+                      <a
+                        (click)="perviousP()"
+                        class="page-link blue cursor"
+                      >
+                        previous
+                      </a>
+                    </li>
+                    
+                    <li class="page-item" *ngIf="next">
+                      <a
+                        (click)="paginate()"
+                        class="page-link blue cursor"
+                        
+                      >
+                        next
+                      </a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

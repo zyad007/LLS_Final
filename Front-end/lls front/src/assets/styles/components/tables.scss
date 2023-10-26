@@ -1,0 +1,50 @@
+.table-lls {
+  table {
+    border: 1px solid #ccc8c8;
+    width: 100%;
+
+    th,
+    tr,
+    td {
+      border: 0;
+      border-bottom: 1px solid #ccc8c8;
+    }
+    th {
+      background-color: #eaedff;
+    }
+    th,
+    td,
+    tr {
+      padding: 0.7rem 1.3rem;
+      font-family: "rubik";
+      font-size: 16px;
+      font-weight: 400;
+      //   line-height: 12px;
+      font-style: normal;
+      color: #666666;
+    }
+  }
+}
+.pageNu {
+  border: 1px solid #ccc8c8;
+  border-top: 0;
+  width: 100% !important;
+}
+.title {
+  display: flex;
+  align-items: center;
+  h4 {
+    font-family: "rubik";
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    font-style: normal;
+    color: #080e33;
+  }
+  span {
+    margin: 0;
+    padding: 0 0.3rem;
+    color: #666666;
+    font-size: 14px;
+  }
+}

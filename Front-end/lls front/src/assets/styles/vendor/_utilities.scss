@@ -1,0 +1,24 @@
+$utilities: (
+  map-merge(
+    $utilities,
+    (
+      "padding":
+        map-merge(
+          map-get($utilities, "padding"),
+          (
+            values:
+              map-merge(
+                map-get(map-get($utilities, "padding"), "values"),
+                (
+                  6: 6rem,
+                  7: 7rem,
+                  8: 8rem,
+                  9: 9rem,
+                  10: 10rem,
+                )
+              ),
+          )
+        ),
+    )
+  )
+);

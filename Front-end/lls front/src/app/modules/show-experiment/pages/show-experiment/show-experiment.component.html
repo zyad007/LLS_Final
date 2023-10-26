@@ -1,0 +1,178 @@
+<div
+  *ngIf="authServices.searchStringInArray('ViewExp', authServices.Permissions)"
+>
+  <div>
+    <div class="lls-container mt-5" *ngIf="ExperimentsList$ as Experiments">
+      <div class="row my-5 justify-content-between">
+        <div class="col-lg-6 col-12"></div>
+        <div class="col-lg-6 col-12">
+          <div class="d-flex">
+            <div class="d-flex justify-content-around align-items-center w-100">
+              <button
+                class="grey-btn blue dropdown-toggle"
+                (click)="importExperiment()"
+                *ngIf="
+                  authServices.searchStringInArray(
+                    'AddDeleteEdit_Exp',
+                    authServices.Permissions
+                  )
+                "
+              >
+                Import
+              </button>
+              <button
+                *ngIf="
+                  authServices.searchStringInArray(
+                    'AddDeleteEdit_Exp',
+                    authServices.Permissions
+                  )
+                "
+                class="blue-btn dropdown-toggle"
+                routerLink="/user/show-ex/create-ex"
+              >
+                New Experiment
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-flex align-items-center my-2">
+            <h6 class="bold black mb-0 me-3">Filter By:</h6>
+            <div class="search-input dropdown-toggle mx-4">
+              <input
+                #searchByname
+                class=""
+                placeholder="filter by experiment name"
+                (change)="searchByName(searchByname.value)"
+              />
+            </div>
+
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByCoursename
+                class=""
+                placeholder="filter by related course"
+                (change)="searchByCourseName(searchByCoursename.value)"
+              />
+            </div>
+          </div>
+          <div class="table-lls mt-5 w-100">
+            <table>
+              <tr>
+                <!-- <th>Id</th> -->
+                <th>Experiment Name</th>
+                <th>Author Name</th>
+                <th>Related Course</th>
+                <!-- <th>Start Date</th>
+                <th>End Date</th> -->
+
+                <th
+                  class="text-center"
+                  *ngIf="
+                    authServices.searchStringInArray(
+                      'AddDeleteEdit_Exp',
+                      authServices.Permissions
+                    )
+                  "
+                >
+                  Actions
+                </th>
+              </tr>
+              <tr *ngFor="let course of Experiments">
+                <!-- <td>{{ course.idd | sub }}</td> -->
+                <td>{{ course.name }}</td>
+                <td>{{ course.authorName }}</td>
+                <td>{{ course?.relatedCourse }}</td>
+                <!-- <td>{{ course.startDate | date }}</td>
+                <td>{{ course.endDate | date }}</td> -->
+                <td
+                  class="blue"
+                  *ngIf="
+                    authServices.searchStringInArray(
+                      'AddDeleteEdit_Exp',
+                      authServices.Permissions
+                    )
+                  "
+                >
+                  <div
+                    class="d-flex align-items-center justify-content-between w-100"
+                  >
+                    <a
+                      class="blue cursor"
+                      routerLink="sh-details/{{ course.idd }}"
+                    >
+                      Veiw
+                    </a>
+                    <a
+                      class="blue cursor mx-3"
+                      (click)="openEditExperiment(course.idd)"
+                    >
+                      Edit
+                    </a>
+                    <a class="blue cursor mx-3" (click)="copyLink(course.idd)">
+                      Share
+                    </a>
+                    <button
+                      class="blue-btn white cursor px-2 py-1"
+                      (click)="exportExperiment(course.idd)"
+                    >
+                      Export
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div
+              class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+            >
+              <div>showing 1 to 10 </div>
+              <nav aria-label="Page navigation example  " class="page my-2">
+                <ul class="pagination d-flex justify-content-center">
+                  <li class="page-item" *ngIf="pervious">
+                    <a class="page-link blue cursor" (click)="perviousP()">
+                      previous
+                    </a>
+                  </li>
+                  <!-- <li class="page-item" *ngFor="let page of pages">
+                    <a
+                      *ngIf="page <= 5"
+                      (click)="paginate(page, pages)"
+                      class="page-link orange cursor"
+                      [ngClass]="{ active: page === currentPageNumber }"
+                      >{{ page }}</a
+                    >
+                  </li> -->
+                  <li class="page-item" *ngIf="next">
+                    <a (click)="paginate()" class="page-link blue cursor">
+                      next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-dialog
+    *ngIf="id"
+    header="Edit Experiment"
+    [(visible)]="courseServices.editExperimentForm"
+    [draggable]="false"
+    [modal]="true"
+    [style]="{ width: '50vw', height: '70vh' }"
+  >
+    <app-edit-experiment [itemId]="id"></app-edit-experiment>
+  </p-dialog>
+  <p-toast position="top-center" key="check" [baseZIndex]="5000"></p-toast>
+  <p-dialog
+    header="Import Experiment"
+    [(visible)]="exService.importDisplay"
+    [draggable]="false"
+    [modal]="true"
+    [style]="{ width: '50vw', height: '70vh' }"
+  >
+    <app-import-experiment></app-import-experiment>
+  </p-dialog>
+</div>

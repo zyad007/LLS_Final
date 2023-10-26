@@ -1,0 +1,131 @@
+<p-dialog
+  *ngIf="
+    authServices.searchStringInArray(
+      'AddDeleteEdit_Exp',
+      authServices.Permissions
+    )
+  "
+  header="Preview"
+  [(visible)]="previewDisplay"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{ width: '100vw', height: '100vh' }"
+  [maximizable]="true"
+>
+  <app-preview [sections]="sections"></app-preview>
+</p-dialog>
+<div
+  class="lls-container mt-5"
+  *ngIf="ExperimentDetails$ | async as experiment"
+>
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <div class="">
+        <div class="d-flex align-items-center">
+          <h6 class="blue bold cursor mb-0" routerLink="/user/show-ex">
+            Experiments/
+          </h6>
+          <h6 class="grey regular mb-0 mx-2">{{ experiment.data.name }}</h6>
+        </div>
+        <h3 class="black bold mb-0 mt-3">{{ experiment.data.name }}</h3>
+      </div>
+      <div class="my-3">
+        <div class="d-flex align-items-center my-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+            />
+          </svg>
+          <p class="black regular mx-2 mb-0">
+            Start Date :{{ experiment.data.startDate | date }}
+          </p>
+        </div>
+        <div class="d-flex align-items-center my-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+            />
+          </svg>
+          <p class="black regular mx-2 mb-0">
+            End Date :{{ experiment.data.endDate | date }}
+          </p>
+        </div>
+        <div class="d-flex align-items-center my-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+            />
+          </svg>
+          <p class="black regular mx-2 mb-0">
+            Author Name :{{ experiment.data.authorName }}
+          </p>
+        </div>
+        <div class="d-flex align-items-center my-3">
+          <p class="black regular mx-0 mb-0">
+            Description :{{ experiment.data.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="d-flex align-items-center">
+        <button
+          (click)="openPreview()"
+          class="blue-btn mx-4"
+          *ngIf="experiment.data.hasLLO"
+        >
+          Preview
+        </button>
+        <button
+          routerLink="/auth-tool/{{ id }}"
+          class="blue-btn"
+          *ngIf="!experiment.data.hasLLO"
+        >
+          Create/Edit LLO
+        </button>
+      </div>
+    </div>
+    <div class="col-12 my-3">
+      <div>
+        <p class="text-center bold text-danger">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between">
+        <app-forms-spinner></app-forms-spinner>
+
+        <button
+          class="blue cursor blue-btn bg-white border border-danger black"
+          (click)="deletExperiment(experiment.data.idd)"
+        >
+          Delete This Experiment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

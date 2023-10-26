@@ -1,0 +1,60 @@
+<section class="my-3 p-4 w-100">
+  <!-- <h5 class="blue">MCQ multi choice Question</h5> -->
+  <div class="accordion-item my-3">
+    <h2 class="accordion-header" id="headingHe">
+      <button
+        class="my-2 px-2 blue-btn"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseHe"
+        aria-expanded="false"
+        aria-controls="collapseHe"
+      >
+         Question Help
+      </button>
+    </h2>
+    <div
+      id="collapseHe"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingHe"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">
+        <div class="lls-form">
+          <div class="row my-2">
+            <div class="col-md-4">
+              <div class="lls-form-group">
+                <p class="form-label">Help Text:</p>
+                <p class="form-input">{{ data.config.help }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>{{ data.content.data.question }}</div>
+    <div class="">
+      <div
+        class=""
+        *ngFor="let choice of data.content.data.choices; let i = index"
+      >
+        <div>
+          <p-checkbox
+            (onChange)="setMultiMcq()"
+            [(ngModel)]="chooices"
+            [inputId]="'answer' + i + choice.choice"
+            [name]="'answer' + i + choice.choice"
+            [value]="i"
+            class="mx-1"
+          ></p-checkbox>
+          <label [for]="'answer' + i + choice.choice">{{
+            choice.choice
+          }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <hr> -->

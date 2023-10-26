@@ -1,0 +1,35 @@
+$black: #000000;
+$white: #ffffff;
+$white100: #f2f2f2;
+$blue: #2948ff;
+$beige: #f1debd;
+$lightBlue: #eaedff;
+// $primary: #d9a74e;
+// $grey50: #d5d5d5;
+$grey: #707070;
+// $grey100: #6a6a6a;
+// $green: #7bb463;
+.bg-content {
+  background-color: rgba(#2948ff, 15%);
+  border-radius: 10px;
+}
+.black {
+  color: $black !important;
+}
+.white {
+  color: $white;
+}
+.light-blue {
+  color: $lightBlue;
+}
+.bg-light-blue {
+  background-color: $lightBlue !important;
+}
+
+.blue {
+  color: $blue;
+}
+.bg-forms {
+  background-color: rgba($white100, 100%);
+  border-radius: 10px;
+}

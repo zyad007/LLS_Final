@@ -1,0 +1,41 @@
+<div class="lls-container mt-5" *ngIf="RoleDetails$ | async as Role">
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="">
+        <div class="d-flex align-items-center">
+          <h6 class="blue bold cursor mb-0" routerLink="/user/users">Roles/</h6>
+          <h6 class="grey regular mb-0 mx-2">{{ Role.data.name }}</h6>
+        </div>
+        <h3 class="black bold mb-5 mt-3">{{ Role.data.name }}</h3>
+      </div>
+      <div class="my-3">
+        <div class="d-flex align-items-center my-2">
+          <p class="black regular mx-2 mb-0">name :{{ Role.data.name }}</p>
+        </div>
+        <h6 class="regular mx-2 mb-0 blue">Permissions:</h6>
+        <div class="d-flex align-items-center my-2">
+          <ul>
+            <li *ngFor="let per of Role.data.permissions" class="">
+              <p class="black regular mx-2 mb-0">
+                {{ per }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between">
+        <app-forms-spinner></app-forms-spinner>
+        <button
+          class="blue cursor blue-btn bg-white border border-danger black"
+          (click)="deletRole(id)"
+        >
+          Delete This Role
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

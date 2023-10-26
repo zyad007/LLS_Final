@@ -1,0 +1,22 @@
+/* Screen Sizes */
+// ex Small Screens
+@import "/node_modules/bootstrap/scss/functions";
+@import "/node_modules/bootstrap/scss/variables";
+@import "/node_modules/bootstrap/scss/mixins";
+@mixin x-small-screen {
+  @media only screen and (min-width: 320px) {
+    @content;
+  }
+}
+// Large Screens
+@mixin large-screen {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+// Extra Large Screens
+@mixin xlarge-screen {
+  @media only screen and (min-width: 1600px) {
+    @content;
+  }
+}

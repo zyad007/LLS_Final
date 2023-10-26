@@ -1,0 +1,40 @@
+<div class="lls-container">
+  <form
+    [formGroup]="RoleEditForm"
+    (ngSubmit)="onSubmit()"
+    class="mt-5 lls-form"
+  >
+    <div class="form-content">
+      <div class="row mb-3">
+        <div class="col-md-4 col-12">
+          <app-inputs
+            [formControlName]="'name'"
+            [label]="'Name'"
+            [formControl]="formControlData('name')"
+            [errorMessages]="errorMessages"
+            [transparent]="true"
+          >
+          </app-inputs>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="lls-form-group">
+            <label>Permissions:</label>
+          </div>
+          <input type="checkbox" (input)="addAllPermission()" />
+          <label class="mx-3 blue">All Permission </label>
+          <div *ngFor="let Permission of allPermission">
+            <input type="checkbox" (input)="addPermission(Permission)" />
+            <label class="mx-3">{{ Permission }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="my-3">
+        <div class="btn-container">
+          <button class="blue-btn" type="submit">Submit</button>
+          <app-forms-spinner></app-forms-spinner>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

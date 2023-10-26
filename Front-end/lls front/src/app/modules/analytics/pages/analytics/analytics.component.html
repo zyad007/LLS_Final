@@ -1,0 +1,102 @@
+<div
+  *ngIf="
+    authServices.searchStringInArray(
+      'ViewAnalytics_Teacher',
+      authServices.Permissions
+    )
+  "
+>
+  <div>
+    <div class="lls-container mt-2" *ngIf="AnalyticsList$ as Analytics">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex align-items-center my-2">
+            <h6 class="bold black mb-0 me-3">Filter By:</h6>
+            <div class="search-input dropdown-toggle mx-4">
+              <input
+                #searchByname
+                class=""
+                placeholder="filter by course name"
+                (change)="searchByName(searchByname.value)"
+              />
+            </div>
+
+            <div class="search-input dropdown-toggle">
+              <input
+                #searchByCoursename
+                class=""
+                placeholder="filter by experiment name"
+                (change)="searchByCourseName(searchByCoursename.value)"
+              />
+            </div>
+          </div>
+          <div class="table-lls my-5">
+            <table>
+              <tr>
+                <th>Experiment Name</th>
+                <th>Course Name</th>
+                <th>Author Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let Analytic of Analytics">
+                <td>{{ Analytic.name }}</td>
+                <td>{{ Analytic.courseName }}</td>
+                <td>{{ Analytic.authorName }}</td>
+                <td>{{ Analytic.startDate | date }}</td>
+                <td>{{ Analytic.endDate | date }}</td>
+                <td>
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <a
+                      class="blue cursor text-decoration-none mx-4"
+                      routerLink="ero/{{ Analytic.idd }}"
+                    >
+                      Veiw
+                    </a>
+                    <button
+                      class="blue-btn px-2 py-2"
+                      (click)="exportExperiment(Analytic.idd)"
+                    >
+                      Report
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div
+              class="d-flex justify-content-between align-items-center h-100 pageNu p-3"
+            >
+              <div>showing 1 to 10 </div>
+
+              <div class="">
+                <nav aria-label="Page navigation example  " class="page my-2">
+                  <ul class="pagination d-flex justify-content-center">
+                    <li class="page-item" *ngIf="pervious">
+                      <a class="page-link blue cursor" (click)="perviousP()"> previous </a>
+                    </li>
+                    <!-- <li class="page-item" *ngFor="let page of pages">
+                      <a
+                        (click)="paginate(page, pages)"
+                        class="page-link orange cursor"
+                        [ngClass]="{ active: page === currentPageNumber }"
+                        >{{ page }}</a
+                      >
+                    </li> -->
+                    <li class="page-item" *ngIf="next">
+                      <a (click)="paginate()" class="page-link blue cursor">
+                        next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

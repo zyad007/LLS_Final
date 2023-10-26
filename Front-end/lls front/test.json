@@ -1,0 +1,111 @@
+{
+    "lla": {
+        "sections": [
+            {
+                "index": 0,
+                "title": "section 1",
+                "column1": [
+                    {
+                        "index": 3,
+                        "mainType": "QUESTION",
+                        "type": "TRUE_OR_FALSE_QUESTION_BLOCK",
+                        "studentAnswers": {
+                            "statements": [
+                                {
+                                    "statementId": 0,
+                                    "answer": false
+                                },
+                                {
+                                    "statementId": 1,
+                                    "answer": true
+                                },
+                                {
+                                    "statementId": 2,
+                                    "answer": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "column2": [],
+                "column3": []
+            },
+            {
+                "index": 1,
+                "title": "section 2",
+                "column1": [
+                    {
+                        "index": 1,
+                        "mainType": "QUESTION",
+                        "type": "SINGLE_SELECT_MCQ_BLOCK",
+                        "studentAnswers": {
+                            "choices": [
+                                {
+                                    "choiceId": 1
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "index": 0,
+                        "mainType": "QUESTION",
+                        "type": "SINGLE_SELECT_MCQ_BLOCK",
+                        "studentAnswers": {
+                            "choices": [
+                                {
+                                    "choiceId": 1
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "mainType": "QUESTION",
+                        "type": "OPEN_QUESTION_BLOCK",
+                        "studentAnswers": {
+                            "answer": "mousa"
+                        }
+                    }
+                ],
+                "column2": [
+                    {
+                        "index": 0,
+                        "mainType": "QUESTION",
+                        "type": "MULTI_SELECT_MCQ_BLOCK",
+                        "studentAnswers": {
+                            "choices": [
+                                {
+                                    "choiceId": 2
+                                },
+                                {
+                                    "choiceId": 0
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "mainType": "QUESTION",
+                        "type": "TRUE_OR_FALSE_QUESTION_BLOCK",
+                        "studentAnswers": {
+                            "statements": [
+                                {
+                                    "statementId": 0,
+                                    "answer": true
+                                },
+                                {
+                                    "statementId": 1,
+                                    "answer": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "column3": []
+            }
+        ]
+    },
+    "expIdd": "119b108d-f825-46de-b633-d10fa9718c3c",
+    "courseIdd": "89628c23-e196-48c1-8726-da9d2a5fb1cb",
+    "totalTimeInMin": 0
+}

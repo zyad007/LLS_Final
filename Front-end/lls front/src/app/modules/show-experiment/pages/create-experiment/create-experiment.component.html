@@ -1,0 +1,55 @@
+<div
+  class="lls-container mt-5"
+  *ngIf="
+    authServices.searchStringInArray(
+      'AddDeleteEdit_Exp',
+      authServices.Permissions
+    )
+  "
+>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex align-items-center">
+        <h6 class="blue mb-0 cursor" routerLink="/user/show-ex">Experiments</h6>
+        <p class="mb-0">/New Experiment</p>
+      </div>
+      <div class="my-3">
+        <h4 class="black">New Experiment</h4>
+      </div>
+      <form [formGroup]="experimentForm" (ngSubmit)="onSubmit()" class="mt-5">
+        <div class="form-content">
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'name'"
+                [label]="'Name'"
+                [formControl]="formControlData('name')"
+                [errorMessages]="errorMessages"
+                [transparent]="true"
+              >
+              </app-inputs>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 col-12">
+              <app-inputs
+                [formControlName]="'description'"
+                [label]="'Description'"
+                [formControl]="formControlData('description')"
+                [errorMessages]="errorMessages"
+              >
+              </app-inputs>
+            </div>
+          </div>
+
+          <div class="my-3">
+            <div class="btn-container">
+              <button class="blue-btn" type="submit">Submit</button>
+              <app-forms-spinner></app-forms-spinner>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

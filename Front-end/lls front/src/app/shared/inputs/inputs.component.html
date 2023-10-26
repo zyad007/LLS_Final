@@ -1,0 +1,101 @@
+<div class="lls-form-group" [class.phone]="type === 'phone'" setRtl>
+  <label *ngIf="label" class="form-control-label" [for]="formControlName"
+    >{{ label }}<span *ngIf="required" class="required">*</span>:</label
+  >
+  <input
+    *ngIf="type !== 'textarea'"
+    [id]="formControlName"
+    class="form-control"
+    [class.disabled]="disabled"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    (input)="detectValueChange($event.target)"
+    [min]="minimum"
+    [max]="maximum"
+    [class.has-error]="
+      (formControl.touched || formControl.dirty) && !formControl.valid
+    "
+  />
+  <textarea
+    *ngIf="type === 'textarea'"
+    class="form-control textarea"
+    [ngClass]="{ gray: blackLabel }"
+    [id]="formControlName"
+    [placeholder]="placeholder"
+    (input)="detectValueChange($event.target)"
+    [disabled]="disabled"
+    [class.has-error]="
+      (formControl.touched || formControl.dirty) && !formControl.valid
+    "
+  ></textarea>
+
+  <div
+    class="errors-container"
+    *ngIf="(formControl.touched || formControl.dirty) && !formControl.valid"
+  >
+    <span class="errors" *ngIf="formControl.errors?.['required']">{{
+      errorMessages[formControlName]?.required
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['maxlength']">{{
+      errorMessages[formControlName]?.maxlength
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['minlength']">{{
+      errorMessages[formControlName]?.minlength
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['max']">{{
+      errorMessages[formControlName]?.max
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['min']">{{
+      errorMessages[formControlName]?.min
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notAlphabet']">{{
+      errorMessages[formControlName]?.notAlphabet
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notAlphabet']">{{
+      errorMessages[formControlName]?.notEnglish
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notAlphabet']">{{
+      errorMessages[formControlName]?.notArabic
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notEnAlphaNum']">{{
+      errorMessages[formControlName]?.notEnAlphaNum
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notArAlphaNum']">{{
+      errorMessages[formControlName]?.notArAlphaNum
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notAlphaNum']">{{
+      errorMessages[formControlName]?.notAlphaNum
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notNumber']">{{
+      errorMessages[formControlName]?.notNumber
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notEmail']">{{
+      errorMessages[formControlName]?.notEmail
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notPhone']">{{
+      errorMessages[formControlName]?.notPhone
+    }}</span>
+    <span class="errors" *ngIf="formControl.errors?.['notURL']">
+      {{ errorMessages[formControlName]?.notURL }}
+    </span>
+    <span class="errors" *ngIf="formControl.errors?.['CVError']">
+      {{ errorMessages[formControlName]?.invalidEx }}
+    </span>
+    <span
+      class="errors"
+      *ngIf="formControl.errors?.['notNumber'] ||
+        (formControl.errors?.['minlength'] || formControl.errors?.['maxlength']) "
+    >
+      {{ errorMessages[formControlName]?.notNumberAndYear }}
+    </span>
+  </div>
+
+  <div
+    class="error-message"
+    *ngIf="
+      (formControl.touched || formControl.dirty) && !formControl.parent?.valid
+    "
+  ></div>
+</div>

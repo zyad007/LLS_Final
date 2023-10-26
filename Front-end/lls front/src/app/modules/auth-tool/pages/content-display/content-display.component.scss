@@ -1,0 +1,17 @@
+.img-display {
+  overflow: hidden;
+  // cursor: pointer;
+  img {
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  &:hover {
+    overflow: hidden;
+    border-radius: 10px;
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+}
+
